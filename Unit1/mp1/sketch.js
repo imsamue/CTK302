@@ -2,19 +2,63 @@ function setup() {
   createCanvas(600, 400);
   rectMode(CENTER);
   angleMode(DEGREES);
+  textAlign(CENTER);
 }
 
 function draw() {
   if (mouseIsPressed) {
-    background("orange");
-    
-    //head
+    background("blue");
+
+    //stars
     noStroke();
+    fill(255);
+    push();
+    translate(width * random(1), height * random(1));
+    rotate(degrees(frameCount / 300));
+    star(0, 0, 8, 20, 5);
+    pop();
+
+    push();
+    translate(width * random(1), height * random(1));
+    rotate(degrees(frameCount / 500));
+    star(0, 0, 8, 20, 5);
+    pop();
+
+    push();
+    translate(width * random(1), height * random(0.5));
+    rotate(degrees(frameCount / 250.0));
+    star(0, 0, 8, 20, 5);
+    pop();
+
+    push();
+    translate(width * random(1), height * random(1));
+    rotate(degrees(frameCount / 350));
+    star(0, 0, 8, 20, 5);
+    pop();
+
+    push();
+    translate(width * random(1), height * random(1));
+    rotate(degrees(frameCount / 400));
+    star(0, 0, 8, 20, 5);
+    pop();
+
+    push();
+    translate(width * random(1), height * random(1));
+    rotate(degrees(frameCount / 400));
+    star(0, 0, 8, 20, 5);
+    pop();
+
+    push();
+    translate(width * random(1), height * random(1));
+    rotate(degrees(frameCount / 400));
+    star(0, 0, 8, 20, 5);
+    pop();
+
+    //head
     fill(255);
     ellipse(width / 3, height / 3, 120, 120);
 
     //nose
-    noStroke;
     fill("pink");
     triangle(
       width / 3,
@@ -79,9 +123,57 @@ function draw() {
 
     //mouth
     stroke(0);
-    fill(200,0,100);
+    fill(200, 0, 100);
     arc(width / 3, 145, 50, 60, 20, 160, CHORD);
 
+    //stars
+    noStroke();
+    fill(255, 240);
+    push();
+    translate(width * random(1), height * random(1));
+    rotate(degrees(frameCount / 300));
+    star(0, 0, 8, 20, 5);
+    pop();
+
+    push();
+    translate(width * random(1), height * random(1));
+    rotate(degrees(frameCount / 500));
+    star(0, 0, 8, 20, 5);
+    pop();
+
+    push();
+    translate(width * random(1), height * random(0.5));
+    rotate(degrees(frameCount / 250.0));
+    star(0, 0, 8, 20, 5);
+    pop();
+
+    push();
+    translate(width * random(1), height * random(1));
+    rotate(degrees(frameCount / 350));
+    star(0, 0, 8, 20, 5);
+    pop();
+
+    push();
+    translate(width * random(1), height * random(1));
+    rotate(degrees(frameCount / 400));
+    star(0, 0, 8, 20, 5);
+    pop();
+
+    push();
+    translate(width * random(1), height * random(1));
+    rotate(degrees(frameCount / 400));
+    star(0, 0, 8, 20, 5);
+    pop();
+
+    push();
+    translate(width * random(1), height * random(1));
+    rotate(degrees(frameCount / 400));
+    star(0, 0, 8, 20, 5);
+    pop();
+
+    textSize(80);
+    fill(255 ,0, 0)
+    text("ZOOM\nCAT", 400, 100);
   } else {
     background("navy");
 
@@ -90,7 +182,7 @@ function draw() {
     ellipse(width / 3, height / 3, 120, 120);
 
     //nose
-    noStroke;
+    noStroke();
     fill("pink");
     triangle(
       width / 3,
@@ -158,12 +250,74 @@ function draw() {
     fill(0, 0);
     arc(width / 3, 140, 40, 40, 30, 150);
 
+    //stars
+    noStroke();
+    fill(255, 255, 0);
+    push();
+    translate(width * 0.5, height * 0.1);
+    rotate(degrees(frameCount / 300));
+    star(0, 0, 8, 20, 5);
+    pop();
+
+    push();
+    translate(width * 0.9, height * 0.1);
+    rotate(degrees(frameCount / 500));
+    star(0, 0, 8, 20, 5);
+    pop();
+
+    push();
+    translate(width * 0.65, height * 0.35);
+    rotate(degrees(frameCount / 250.0));
+    star(0, 0, 8, 20, 5);
+    pop();
+
+    push();
+    translate(width * 0.1, height * 0.3);
+    rotate(degrees(frameCount / 350));
+    star(0, 0, 8, 20, 5);
+    pop();
+
+    push();
+    translate(width * 0.2, height * 0.05);
+    rotate(degrees(frameCount / 400));
+    star(0, 0, 8, 20, 5);
+    pop();
+
+    push();
+    translate(width * 0.75, height * 0.15);
+    rotate(degrees(frameCount / 400));
+    star(0, 0, 8, 20, 5);
+    pop();
+
+    push();
+    translate(width * 0.85, height * 0.4);
+    rotate(degrees(frameCount / 400));
+    star(0, 0, 8, 20, 5);
+    pop();
+
+    fill("white");
+    textSize(20);
+    text("Sorin is a good boy, who sits\nquietly at night.   That is, until\nsome unknown event triggers...", 440, 250)
+
     //coordinates
+    textSize(15)
     fill("white");
     text(mouseX + "," + mouseY, 20, 20);
   }
+}
 
-  function mouseReleased() {
-    print(mouseX + "," + mouseY);
+//define stars
+function star(x, y, radius1, radius2, npoints) {
+  let angle = 360 / npoints;
+  let halfAngle = angle / 2.0;
+  beginShape();
+  for (let a = 0; a < 360; a += angle) {
+    let sx = x + cos(a) * radius2;
+    let sy = y + sin(a) * radius2;
+    vertex(sx, sy);
+    sx = x + cos(a + halfAngle) * radius1;
+    sy = y + sin(a + halfAngle) * radius1;
+    vertex(sx, sy);
   }
+  endShape(CLOSE);
 }
