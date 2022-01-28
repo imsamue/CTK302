@@ -1,8 +1,11 @@
+let superhero;
+
 function setup() {
   createCanvas(600, 400);
   rectMode(CENTER);
   angleMode(DEGREES);
   textAlign(CENTER);
+  superhero=loadFont("assets/BADBB.TTF");
 }
 
 function draw() {
@@ -173,6 +176,7 @@ function draw() {
 
     textSize(80);
     fill(255 ,0, 0)
+    textFont(superhero);
     text("ZOOM\nCAT", 400, 100);
   } else {
     background("navy");
