@@ -5,7 +5,7 @@ function setup() {
   rectMode(CENTER);
   angleMode(DEGREES);
   textAlign(CENTER);
-  superhero=loadFont("assets/BADBB.TTF");
+  superhero=loadFont("assets/Minnie.TTF");
 }
 
 function draw() {
@@ -174,10 +174,10 @@ function draw() {
     star(0, 0, 8, 20, 5);
     pop();
 
-    textSize(80);
+    textSize(70);
     fill(255 ,0, 0)
     textFont(superhero);
-    text("ZOOM\nCAT", 400, 100);
+    text("ZOOM\nCAT", 420, 100);
   } else {
     background("navy");
 
@@ -301,7 +301,8 @@ function draw() {
 
     fill("white");
     textSize(20);
-    text("Sorin is a good boy, who sits\nquietly at night.   That is, until\nsome unknown event triggers...", 440, 250)
+    textFont("Georgia");
+    text("Sorin is a good boy, who sits\nquietly at night.  That is, until\nsome unknown event triggers...", 440, 250)
 
     //coordinates
     textSize(15)
