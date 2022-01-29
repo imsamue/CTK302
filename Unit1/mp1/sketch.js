@@ -392,7 +392,7 @@ function draw() {
     fill("white");
     textSize(20);
     textFont("Georgia");
-    text("Sorin is a good boy, who sits\nquietly at night.  That is, until\nsome unknown event triggers...", 440, 250)
+    text("Sorin is a good boy, who sits\nquietly at night. That is, until\nsome unknown event triggers...", 440, 250)
 
     // //coordinates
     // textSize(15)
