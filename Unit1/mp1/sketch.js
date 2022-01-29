@@ -57,7 +57,45 @@ function draw() {
     star(0, 0, 8, 20, 5);
     pop();
 
+    //tail
+    fill(0);
+    push();
+    translate(420, 260);
+    rotate(80);
+    ellipse(0, 0, 20, 60);
+    pop();
+    ellipse(447, 241, 15, 35);
+
+    // back legs
+    fill("white");
+    push();
+    translate();
+    rotate(45);
+    ellipse(width / 3, 260, 30, 100);
+    pop();
+    // ellipse(width / 3 + 20, 280, 30, 100);
+
+    //body
+    noStroke();
+    fill(255);
+    push();
+    translate(width / 3 + 95, 235);
+    rotate(-75);
+    ellipse(0, 0, 110, 220);
+    pop();
+
+    // front legs
+    stroke(100);
+    strokeWeight(0.5);
+    push();
+    translate(width / 3, 280);
+    rotate(30);
+    ellipse(0, 0, 30, 100);
+    pop();
+    // ellipse(width / 3 + 20, 280, 30, 100);
+
     //head
+    noStroke();
     fill(255);
     ellipse(width / 3, height / 3, 120, 120);
 
@@ -174,10 +212,10 @@ function draw() {
     star(0, 0, 8, 20, 5);
     pop();
 
-    textSize(70);
+    textSize(100);
     fill(255 ,0, 0)
     textFont(superhero);
-    text("ZOOM\nCAT", 420, 100);
+    text("ZOOM\nCAT", 420, 75);
   } else {
     background("navy");
 
@@ -232,7 +270,7 @@ function draw() {
     //eyes
     strokeWeight(0.25);
     stroke(0);
-    fill(230, 230, 0);
+    fill(240, 230, 0);
     ellipse(180, 115, 25, 15);
     ellipse(220, 115, 25, 15);
     fill(0);
@@ -254,8 +292,28 @@ function draw() {
     fill(0, 0);
     arc(width / 3, 140, 40, 40, 30, 150);
 
-    //stars
+    //tail
+    fill(0);
+    push();
+    translate(145, 270);
+    rotate(45);
+    ellipse(0, 0, 20, 60);
+    pop();
+    ellipse(128, 300, 15, 35);
+
+    //body
     noStroke();
+    fill(255);
+    ellipse(width / 3, 245, 105, 150);
+    rect(width / 3, 300, 90, 50, 35, 35, 20, 20);
+
+    //legs
+    stroke(190);
+    strokeWeight(1);
+    ellipse(width / 3 - 20, 280, 30, 100);
+    ellipse(width / 3 + 20, 280, 30, 100);
+
+    //stars
     fill(255, 255, 0);
     push();
     translate(width * 0.5, height * 0.1);
