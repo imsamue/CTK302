@@ -69,11 +69,11 @@ function draw() {
     // back legs
     fill("white");
     push();
-    translate();
-    rotate(45);
-    ellipse(width / 3, 260, 30, 100);
+    translate(width / 3, 250, 30, 100);
+    rotate(60);
+    ellipse(0, 0, 30, 100);
     pop();
-    // ellipse(width / 3 + 20, 280, 30, 100);
+    ellipse(350, 300, 30, 100);
 
     //body
     noStroke();
@@ -92,7 +92,11 @@ function draw() {
     rotate(30);
     ellipse(0, 0, 30, 100);
     pop();
-    // ellipse(width / 3 + 20, 280, 30, 100);
+    push();
+    translate(310, 300);
+    rotate(55);
+    ellipse(0, 0, 30, 100);
+    pop();
 
     //head
     noStroke();
@@ -133,6 +137,34 @@ function draw() {
     curveVertex(160, 90);
     endShape();
     arc(width / 3, height / 3, 120, 120, 191, 264, OPEN);
+
+    push();
+    translate(0, 5);
+    beginShape();
+    curveVertex(240, 160);
+    curveVertex(260, 177);
+    curveVertex(250, 210);
+    curveVertex(270, 230);
+    curveVertex(300, 260);
+    curveVertex(340, 250);
+    curveVertex(370, 260);
+    curveVertex(400, 260);
+    curveVertex(400, 260);
+    curveVertex(420, 260);
+    endShape();
+    pop();
+
+    push();
+    translate(280, 244);
+    rotate(15);
+    arc(0, 0, 280, 140, -120, 355)
+    pop();
+
+    push();
+    translate(258, 186);
+    rotate(-30);
+    ellipse(0, 0, 30, 40);
+    pop();
 
     //ears
     fill("black");
@@ -212,7 +244,7 @@ function draw() {
     star(0, 0, 8, 20, 5);
     pop();
 
-    textSize(100);
+    textSize(80);
     fill(255 ,0, 0)
     textFont(superhero);
     text("ZOOM\nCAT", 420, 75);
@@ -362,10 +394,10 @@ function draw() {
     textFont("Georgia");
     text("Sorin is a good boy, who sits\nquietly at night.  That is, until\nsome unknown event triggers...", 440, 250)
 
-    //coordinates
-    textSize(15)
-    fill("white");
-    text(mouseX + "," + mouseY, 20, 20);
+    // //coordinates
+    // textSize(15)
+    // fill("white");
+    // text(mouseX + "," + mouseY, 20, 20);
   }
 }
 
