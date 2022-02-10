@@ -1,3 +1,5 @@
+let x = 0
+
 function setup() {
   createCanvas(600, 400);
   rectMode(CENTER);
@@ -5,9 +7,19 @@ function setup() {
 }
 
 function draw() {
+  background(100, 100, 255);
+  push();
+  translate(x, 0)
+  x += 10;
+  if (x > width) {
+    x = -800;
+  }
 
-  background(100, 100, 255)
+  Sorin();
+  pop();
+}
 
+function Sorin() {
   //tail
   fill(0);
   push();
@@ -149,5 +161,4 @@ function draw() {
   stroke(0);
   fill(200, 0, 100);
   arc(width / 3, 145, 50, 60, 20, 160, CHORD);
-
 }
