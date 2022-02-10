@@ -3,7 +3,7 @@ let y = 0;
 let font;
 
 function setup() {
-  createCanvas(400, 400);
+  createCanvas(600, 400);
   font = loadFont("assets/BADABB.ttf");
   angleMode(DEGREES);
   textAlign(CENTER);
@@ -12,7 +12,7 @@ function setup() {
 function draw() {
   background(0, 128, 128);
   fill(random (255), 0, random(255));
-  textSize(random(70, 80));
+  textSize(random(70, 75));
   textFont(font);
   push();
   translate(x, 200);
