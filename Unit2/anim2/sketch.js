@@ -10,11 +10,11 @@ function draw() {
   background(100, 100, 255);
   push();
   translate(x, 0)
-  x += 10;
-  if (x > width) {
-    x = -800;
+  x += 12;
+  if (x > width + 400) {
+    x = -600;
   }
-
+  scale(-1, 1);
   Sorin();
   pop();
 }
