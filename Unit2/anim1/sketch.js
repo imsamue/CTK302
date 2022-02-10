@@ -3,12 +3,12 @@ let y = 0;
 let font;
 
 function preLoad(){
-font = loadFont("assets/BADABB.ttf");
+font = loadFont("assets/blazed/Blazed.ttf");
 }
 
 function setup() {
   createCanvas(600, 400);
-  font = loadFont("assets/BADABB.ttf");
+  font = loadFont("assets/blazed/Blazed.ttf");
   angleMode(DEGREES);
   textAlign(CENTER);
 }
@@ -16,7 +16,7 @@ function setup() {
 function draw() {
   background(0, 128, 128);
   fill(random (255), 0, random(255));
-  textSize(random(100, 105));
+  textSize(random(60, 65));
   push();
   translate(x, 200);
   rotate(y);
