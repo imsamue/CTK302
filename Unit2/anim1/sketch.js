@@ -12,7 +12,7 @@ function setup() {
 function draw() {
   background(0, 128, 128);
   fill(random (255), 0, random(255));
-  textSize(random(50, 60));
+  textSize(random(70, 80));
   textFont(font);
   push();
   translate(x, 200);
