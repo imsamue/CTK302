@@ -16,7 +16,7 @@ function setup() {
 function draw() {
   background(0, 128, 128);
   fill(random (255), 0, random(255));
-  textSize(random(70, 75));
+  textSize(random(100, 105));
   push();
   translate(x, 200);
   rotate(y);
