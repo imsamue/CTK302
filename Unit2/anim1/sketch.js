@@ -2,9 +2,12 @@ let x = 0;
 let y = 0;
 let font;
 
+function preLoad(){
+font = loadFont("assets/BADABB.TTF");  
+}
+
 function setup() {
   createCanvas(600, 400);
-  font = loadFont("assets/Moonstar.TTF");
   angleMode(DEGREES);
   textAlign(CENTER);
 }
