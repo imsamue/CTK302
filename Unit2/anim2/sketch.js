@@ -9,7 +9,7 @@ function setup() {
 function draw() {
   background(100, 100, 255);
   push();
-  translate(x, 0)
+  translate(x, 0);
   x += 12;
   if (x > width + 400) {
     x = -600;
