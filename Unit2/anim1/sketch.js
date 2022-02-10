@@ -3,11 +3,12 @@ let y = 0;
 let font;
 
 function preLoad(){
-font = loadFont("assets/Moonstar.TTF");
+font = loadFont("assets/BADABB.ttf");
 }
 
 function setup() {
   createCanvas(600, 400);
+  font = loadFont("assets/BADABB.ttf");
   angleMode(DEGREES);
   textAlign(CENTER);
 }
