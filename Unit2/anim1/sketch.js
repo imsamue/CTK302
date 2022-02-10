@@ -3,7 +3,7 @@ let y = 0;
 let font;
 
 function preLoad(){
-font = loadFont("assets/BADABB.TTF");
+font = loadFont("assets/Moonstar.TTF");
 }
 
 function setup() {
