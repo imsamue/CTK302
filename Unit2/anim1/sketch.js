@@ -4,7 +4,7 @@ let font;
 
 function setup() {
   createCanvas(600, 400);
-  font = loadFont("assets/Minnie.ttf");
+  font = loadFont("assets/Moonstar.ttf");
   angleMode(DEGREES);
   textAlign(CENTER);
 }
