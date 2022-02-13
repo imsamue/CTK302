@@ -57,7 +57,7 @@ function scene2() {
   background(128, 64, 128);
   for (var j = 0; j < 1000; j += 25)
     for (var i = 0; i < 1000; i += 25) {
-      fill(255, 50, 50)
+      fill(random(192, 255), 50, 50)
       push();
       translate(width / 2, -height);
       rotate(45);
