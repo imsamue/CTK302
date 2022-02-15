@@ -1,7 +1,7 @@
 let state = 0;
 
 function setup() {
-  createCanvas(400, 400);
+  createCanvas(displayWidth, displayHeight);
 }
 
 function draw() {
@@ -37,8 +37,8 @@ function mouseReleased() {
 
 function scene0() {
   background(0);
-  for (var j = 0; j < 1000; j += 25)
-    for (var i = 0; i < 1000; i += 25) {
+  for (var j = 0; j < 2000; j += 25)
+    for (var i = 0; i < 2000; i += 25) {
       fill(random(255), random(128), random(255));
       ellipse(i, j, 20, 20);
     }
@@ -46,8 +46,8 @@ function scene0() {
 
 function scene1() {
   background(0, random(50, 255), 0);
-  for (var j = 0; j < 1000; j += 40)
-    for (var i = 0; i < 1000; i += 25) {
+  for (var j = 0; j < 2000; j += 40)
+    for (var i = 0; i < 2000; i += 25) {
       fill(random(128), random(100), 128)
       ellipse(i, j, 50, 35);
     }
@@ -55,11 +55,11 @@ function scene1() {
 
 function scene2() {
   background(128, 64, 128);
-  for (var j = 0; j < 1000; j += 25)
-    for (var i = 0; i < 1000; i += 25) {
+  for (var j = 0; j < 3000; j += 25)
+    for (var i = 0; i < 3000; i += 25) {
       fill(random(192, 255), 50, 50)
       push();
-      translate(width / 2, -height);
+      translate(width / 2, -height - 1000);
       rotate(45);
       rect(i, j, 20, 20);
       pop();
@@ -68,8 +68,8 @@ function scene2() {
 
 function scene3() {
   background(255);
-  for (var j = 0; j < 1000; j += 25)
-    for (var i = 0; i < 1000; i += 25) {
+  for (var j = 0; j < 2000; j += 25)
+    for (var i = 0; i < 2000; i += 25) {
       fill(0, random(255), random(255))
       rect(i, j, 22, 22);
     }
@@ -77,8 +77,8 @@ function scene3() {
 
 function scene4() {
   background(0, 0, 230);
-  for (var j = 0; j < 1000; j += 15)
-    for (var i = 0; i < 1000; i += 25) {
+  for (var j = 0; j < 2000; j += 15)
+    for (var i = 0; i < 2000; i += 25) {
       fill(255, 150, 50)
       ellipse(i, random(j), 20, 20);
     }
