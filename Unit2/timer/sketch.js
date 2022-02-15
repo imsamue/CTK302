@@ -33,6 +33,13 @@ function draw() {
       text("3", (width * 3) / 4, height / 2);
       text("6", width / 2, (height * 3) / 4);
       text("9", width / 4, height / 2);
+
+      timer++;
+      if (timer > 600) {
+        timer = 0;
+        state = 1;
+      }
+
       break;
 
     case 1:
@@ -45,6 +52,13 @@ function draw() {
       }
       fill(50, 192, 50);
       rect(0, (height * 2) / 3, width, height / 3);
+
+      timer++;
+      if (timer > 540) {
+        timer = 0;
+        state = 2;
+      }
+
       break;
 
     case 2:
@@ -89,14 +103,14 @@ function draw() {
       if (x > 310) {
         x = 210;
       }
-      break;
-  }
 
-  timer = timer + 1;
-  if (timer > 500) {
-    timer = 0;
-    state++;
-    if (state > 2) state = 0;
+      timer++;
+      if (timer > 360) {
+        timer = 0;
+        state = 0;
+      }
+
+      break;
   }
 }
 
