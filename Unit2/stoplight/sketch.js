@@ -4,78 +4,64 @@ let state = 0;
 let timer = 0;
 
 function setup() {
-  createCanvas(500, 500);
+  createCanvas(800, 800);
   rectMode(CENTER);
 }
 
 function draw() {
   background(100, 170, 255);
   fill("orange");
-  rect(width / 2, height / 2, 120, 350);
+  rect(width / 2, height / 2, 200, 600);
   noStroke();
   fill(60);
-  rect(width / 2, 470, width, 60)
-  fill("yellow");
-  for (a = 0; a < 550; a+=25){
-    rect(a, 470, 20, 5);
-  }
+  rect(width / 2, 750, width, 70);
+  for (a = 0; a < 850; a += 25) {
+    fill("white");
+    rect(a, 750, 20, 5);
+  fill("blue");
+  stroke(255);
+  strokeWeight(0.5);
+  rect(x, 770, 40, 15);
+  if (x > 820) {
+    x = 0
+  };
+}
 
-  switch(state) {
+  switch (state) {
     case 0:
       stroke("black");
       fill("green");
-      ellipse(width / 2, height / 2 + 100, 80, 80);
+      ellipse(width / 2, height / 2 + 170, 150, 150);
       fill(128);
-      ellipse(width / 2, height / 2, 80, 80);
-      ellipse(width / 2, height / 2 - 100, 80, 80);
-      fill("blue");
-      stroke(255);
-      strokeWeight(0.5);
-      rect(x, 485, 25, 15)
-      x+=2.5;
-      if (x > 513){
-        x = 0
-      };
-      stroke("black");
-    break;
+      ellipse(width / 2, height / 2, 150, 150);
+      ellipse(width / 2, height / 2 - 170, 150, 150);
+      x+=3
+      break;
 
     case 1:
       stroke("black");
       fill(128);
-      ellipse(width / 2, height / 2 + 100, 80, 80);
+      ellipse(width / 2, height / 2 + 170, 150, 150);
       fill("yellow");
-      ellipse(width / 2, height / 2, 80, 80);
+      ellipse(width / 2, height / 2, 150, 150);
       fill(128);
-      ellipse(width / 2, height / 2 - 100, 80, 80);
-      fill("blue");
-      stroke(255);
-      strokeWeight(0.5);
-      rect(x, 485, 25, 15)
-      x+=1;
-      if (x > 513){
-        x = 0
-      };
-      stroke("black");
-    break;
+      ellipse(width / 2, height / 2 - 170, 150, 150);
+      x+=1
+      break;
 
     case 2:
       stroke("black");
       fill(128);
-      ellipse(width / 2, height / 2 + 100, 80, 80);
-      ellipse(width / 2, height / 2, 80, 80);
+      ellipse(width / 2, height / 2 + 170, 150, 150);
+      ellipse(width / 2, height / 2, 150, 150);
       fill("red");
-      ellipse(width / 2, height / 2 - 100, 80, 80);
-      fill("blue");
-      stroke(255);
-      strokeWeight(0.5);
-      rect(x, 485, 25, 15)
-      stroke("black");
-    break;
-
+      ellipse(width / 2, height / 2 - 170, 150, 150);
+      break;
   }
-}
-
-function mouseReleased() {
-  state++;
-  if (state > 2) state = 0;
+  timer++;
+  if (timer > 100) {
+    timer = 0;
+    state++;
+    if (state > 2) state = 0;
+  }
 }
