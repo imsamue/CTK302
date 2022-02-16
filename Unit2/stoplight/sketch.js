@@ -18,14 +18,14 @@ function draw() {
   for (a = 0; a < 850; a += 25) {
     fill("white");
     rect(a, 750, 20, 5);
-  fill("blue");
-  stroke(255);
-  strokeWeight(0.5);
-  rect(x, 770, 40, 15);
-  if (x > 820) {
-    x = 0
-  };
-}
+    fill("blue");
+    stroke(255);
+    strokeWeight(0.5);
+    rect(x, 770, 40, 15);
+    if (x > 820) {
+      x = 0
+    };
+  }
 
   switch (state) {
     case 0:
@@ -35,7 +35,7 @@ function draw() {
       fill(128);
       ellipse(width / 2, height / 2, 150, 150);
       ellipse(width / 2, height / 2 - 170, 150, 150);
-      x+=3
+      x += 3
       break;
 
     case 1:
@@ -46,7 +46,7 @@ function draw() {
       ellipse(width / 2, height / 2, 150, 150);
       fill(128);
       ellipse(width / 2, height / 2 - 170, 150, 150);
-      x+=1
+      x += 1
       break;
 
     case 2:
