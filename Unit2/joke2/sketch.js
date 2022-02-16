@@ -72,8 +72,6 @@ function draw() {
       curveVertex(0, 175);
       curveVertex(-10, 150);
       endShape();
-      fill(192, 0, 0);
-      circle(365, 210, 45);
       timer++;
       if (timer > (3 * 60)) {
         timer = 0;
