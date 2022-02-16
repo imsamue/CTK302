@@ -33,7 +33,7 @@ function draw() {
 
     case 1:
       background(0, 128, 128);
-      fill(0, 225, 0, 32);
+      fill(0, 225, 0, 24);
       noStroke();
       for (a = 0; a < 400; a += 25)
         for (b = 0; b < 400; b += 25) {
@@ -41,7 +41,7 @@ function draw() {
         }
           fill("black");
           textFont(font1);
-          textSize(0);
+          textSize(60);
           text("When it's\nap-\nparant!", width / 2, height / 2);
           break;
         }
