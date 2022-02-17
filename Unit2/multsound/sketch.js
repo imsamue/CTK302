@@ -16,7 +16,8 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(500, 500);
+  createCanvas(800, 400);
+  textAlign(CENTER, CENTER);
 }
 
 function draw() {
@@ -28,7 +29,10 @@ function draw() {
       break;
 
     case 1:
-      text("9 in the Afternoon", 20, 20);
+      background("purple");
+      fill(255);
+      textSize(50);
+      text("9 in the Afternoon", width / 2, height / 4);
       break;
 
     case 2:
@@ -37,7 +41,9 @@ function draw() {
       break;
 
     case 3:
-      text("This is Gospel", 20, 20);
+      background("blue");
+      fill(255);
+      text("This is Gospel", width / 2, height / 4);
       break;
 
     case 4:
@@ -46,7 +52,9 @@ function draw() {
       break;
 
     case 5:
-      text("High Hopes", 20, 20);
+      background("yellow");
+      fill(0);
+      text("High Hopes", width / 2, height / 4);
       break;
   }
 }
