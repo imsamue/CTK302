@@ -9,6 +9,7 @@ function setup() {
   font = loadFont("assets/school.ttf");
   font1 = loadFont("assets/blocks.ttf");
   textAlign(CENTER, CENTER);
+  angleMode(DEGREES);
 }
 
 function draw() {
@@ -41,8 +42,12 @@ function draw() {
         }
           fill("black");
           textFont(font1);
-          textSize(60);
-          text("When it's\nap-\nparant!", width / 2, height / 2);
+          textSize(50);
+          push();
+          translate(width / 2, height / 2);
+          rotate(-20);
+          text("When it's\napparant!", 0, 0);
+          pop();
           break;
         }
   }
