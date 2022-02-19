@@ -11,13 +11,13 @@ let sound0, sound1, sound2, song1;
 
 function preload() {
   sound0 = loadSound("assets/crickets.wav");
-  // sound1 = loadSound("");
+  sound1 = loadSound("assets/water.wav");
   sound2 = loadSound("assets/birds.wav");
   song1 = loadSound("assets/breakingfree.mp3");
   sound0.loop();
   sound0.pause();
-  // sound1.loop();
-  // sound1.pause();
+  sound1.loop();
+  sound1.pause();
   sound2.loop();
   sound2.pause();
   song1.loop();
@@ -119,7 +119,7 @@ function draw() {
       break;
 
     case 6:
-      // sound1.play();
+      sound1.play();
       state = 7;
       break;
 
@@ -143,6 +143,13 @@ function draw() {
       if (b < -650) b = 1400;
       pop();
       break;
+
+      push();
+      scale(0.2)
+      translate(c, 400);
+      fish1();
+      c -= 6;
+      if (c < -600) c = 1300;
 
     case 8:
       sound2.play();
@@ -181,15 +188,46 @@ function draw() {
       sorinRun();
       pop();
       break;
+
+    case 12:
+      sound0.play();
+      state = 13;
+      break;
+
+    case 13:
+      room();
+      push();
+      scale(0.6);
+      translate(400, 350);
+      sorinSit();
+      pop();
+      fill(255);
+      strokeWeight(0.75);
+      ellipse(415, 235, 20, 20);
+      ellipse(435, 215, 25, 25);
+      ellipse(500, 175, 120, 70);
+      textFont(font1);
+      textSize(30);
+      fill("black");
+      noStroke();
+      text("Will we ever know\nwhat he dreams?", 725, 150);
+      break;
+
+    case 14:
+      room();
+      textFont(font0);
+      textSize(50);
+      text("THE END", 500, 175);
+      break;
   }
 }
 
 function mouseReleased() {
   state++;
   if (state >= 2 && state <= 5) state = 5;
-  if (state > 11) state = 0;
+  if (state > 14) state = 0;
   sound0.pause();
-  // sound1.pause();
+  sound1.pause();
   sound2.pause();
   song1.pause();
 }
