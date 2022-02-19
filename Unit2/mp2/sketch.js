@@ -1,87 +1,36 @@
+let x = 0;
 let state = 0;
 let timer = 0;
+let font0, font1;
 
 function setup() {
   createCanvas(1000, 500);
+  font0 = loadFont("assets/glimmer.otf");
+  font1 = loadFont("assets/type.ttf");
   textAlign(CENTER, CENTER);
   rectMode(CENTER);
   angleMode(DEGREES);
 }
 
 function draw() {
-  background(0, 0, 50);
-  //floor
-  fill(100, 80, 50);
-  beginShape();
-  vertex(0, 440);
-  vertex(width / 2, 320);
-  vertex(width, 440);
-  vertex(width, height);
-  vertex(0, width);
-  endShape();
-  //floorboards
-  line(400, 316, width, 460);
-  line(400, 336, width, 480);
-  line(350, 344, width, 500);
-  line(300, 352, width, 520);
-  line(250, 360, width, 540);
-  line(200, 368, width, 560);
-  line(200, 388, width, 580);
-  line(150, 396, width, 600);
-  line(100, 404, width, 620);
-  line(50, 412, width, 640);
-  line(0, 420, width, 660);
-  line(0, 440, width, 680);
-  line(0, 460, width, 700);
-  line(0, 480, width, 720);
-  stroke(0);
-  //walls
-  fill(230, 210, 120);
-  quad(0, 100, width / 2, 20, width / 2, 320, 0, 440);
-  quad(width / 2, 20, width, 100, width, 440, width / 2, 320);
-  //baseboard
-  fill(80, 60, 30);
-  quad(0, 420, width / 2, 300, width / 2, 320, 0, 440);
-  quad(width / 2, 300, width, 420, width, 440, width / 2, 320);
-  //window
-  quad(60, 140, 160, 120, 160, 320, 60, 340);
-  fill(0, 0, 50);
-  quad(70, 146, 150, 130, 150, 314, 70, 330);
-
   switch (state) {
 
     case 0:
-      push();
-      scale(0.6);
-      translate(400, 350);
-      sorinSit();
-      strokeWeight(2);
-      stroke(240, 230, 0, 128);
-      fill(255, 0);
-      arc(180, 115, 25, 15, 0, 180);
-      arc(220, 115, 25, 15, 0, 180);
-      pop();
-      timer++;
-      if (timer > 30) {
-        timer = 0;
-        state = 1;
-      }
+      room();
+      textFont(font0);
+      textSize(25);
+      text("Welcome to the New\nClickable Adventure of", 500, 100);
+      textSize(50);
+      text("SORIN'S DREAMS", 500, 175);
       break;
 
     case 1:
+      room();
       push();
       scale(0.6);
       translate(400, 350);
       sorinSit();
-      strokeWeight(2);
-      stroke(240, 230, 0, 128);
-      fill(255, 0);
-      arc(180, 115, 25, 15, 0, 180);
-      arc(220, 115, 25, 15, 0, 180);
       pop();
-      fill(255);
-      strokeWeight(0.75);
-      ellipse(415, 235, 20, 20);
       timer++;
       if (timer > 30) {
         timer = 0;
@@ -90,20 +39,15 @@ function draw() {
       break;
 
     case 2:
+      room();
       push();
       scale(0.6);
       translate(400, 350);
       sorinSit();
-      strokeWeight(2);
-      stroke(240, 230, 0, 128);
-      fill(255, 0);
-      arc(180, 115, 25, 15, 0, 180);
-      arc(220, 115, 25, 15, 0, 180);
       pop();
       fill(255);
       strokeWeight(0.75);
       ellipse(415, 235, 20, 20);
-      ellipse(435, 215, 25, 25);
       timer++;
       if (timer > 30) {
         timer = 0;
@@ -112,29 +56,54 @@ function draw() {
       break;
 
     case 3:
+      room();
       push();
       scale(0.6);
       translate(400, 350);
       sorinSit();
-      strokeWeight(2);
-      stroke(240, 230, 0, 128);
-      fill(255, 0);
-      arc(180, 115, 25, 15, 0, 180);
-      arc(220, 115, 25, 15, 0, 180);
+      pop();
+      fill(255);
+      strokeWeight(0.75);
+      ellipse(415, 235, 20, 20);
+      ellipse(435, 215, 25, 25);
+      timer++;
+      if (timer > 30) {
+        timer = 0;
+        state = 4;
+      }
+      break;
+
+    case 4:
+      room();
+      push();
+      scale(0.6);
+      translate(400, 350);
+      sorinSit();
       pop();
       fill(255);
       strokeWeight(0.75);
       ellipse(415, 235, 20, 20);
       ellipse(435, 215, 25, 25);
       ellipse(500, 175, 120, 70);
+      textFont(font1);
+      textSize(30);
+      fill("black");
+      noStroke();
+      text("What does Sorin\ndream about\nat night?", 675, 150);
+      break;
+
+    case 5:
+      background(100, 200, 255);
+        x = height;
       break;
   }
 }
 
-// function mouseReleased() {
-//   state++;
-//   if (state > 2) state = 0;
-// }
+function mouseReleased() {
+  state++;
+  if (state >= 2 && state <= 3) state = 4;
+  if (state > 5) state = 0;
+}
 
 function sorinSit() {
   //head
@@ -178,15 +147,12 @@ function sorinSit() {
   triangle(148, 70, 155, 95, 170, 85);
   triangle(252, 70, 250, 95, 230, 85);
 
-  //eyes
-  // strokeWeight(0.25);
-  // stroke(0);
-  // fill(240, 230, 0);
-  // ellipse(180, 115, 25, 15);
-  // ellipse(220, 115, 25, 15);
-  // fill(0);
-  // ellipse(180, 115, 5, 10);
-  // ellipse(220, 115, 5, 10);
+  //eyes closed
+  strokeWeight(2);
+  stroke(240, 230, 0, 128);
+  fill(255, 0);
+  arc(180, 115, 25, 15, 0, 180);
+  arc(220, 115, 25, 15, 0, 180);
 
   //whiskers
   strokeWeight(1);
@@ -223,4 +189,45 @@ function sorinSit() {
   strokeWeight(1);
   ellipse(180, 280, 30, 100);
   ellipse(220, 280, 30, 100);
+}
+
+function room() {
+  background(0, 0, 50);
+  //floor
+  fill(100, 80, 50);
+  beginShape();
+  vertex(0, 440);
+  vertex(width / 2, 320);
+  vertex(width, 440);
+  vertex(width, height);
+  vertex(0, width);
+  endShape();
+  //floorboards
+  stroke(0);
+  line(400, 316, width, 460);
+  line(400, 336, width, 480);
+  line(350, 344, width, 500);
+  line(300, 352, width, 520);
+  line(250, 360, width, 540);
+  line(200, 368, width, 560);
+  line(200, 388, width, 580);
+  line(150, 396, width, 600);
+  line(100, 404, width, 620);
+  line(50, 412, width, 640);
+  line(0, 420, width, 660);
+  line(0, 440, width, 680);
+  line(0, 460, width, 700);
+  line(0, 480, width, 720);
+  //walls
+  fill(230, 210, 120);
+  quad(0, 100, width / 2, 20, width / 2, 320, 0, 440);
+  quad(width / 2, 20, width, 100, width, 440, width / 2, 320);
+  //baseboard
+  fill(80, 60, 30);
+  quad(0, 420, width / 2, 300, width / 2, 320, 0, 440);
+  quad(width / 2, 300, width, 420, width, 440, width / 2, 320);
+  //window
+  quad(60, 140, 160, 120, 160, 320, 60, 340);
+  fill(0, 0, 50);
+  quad(70, 146, 150, 130, 150, 314, 70, 330);
 }
