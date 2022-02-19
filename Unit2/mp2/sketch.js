@@ -11,13 +11,13 @@ let sound0, sound1, sound2, song1;
 
 function preload() {
   sound0 = loadSound("assets/crickets.wav");
-  sound1 = loadSound("");
+  // sound1 = loadSound("");
   sound2 = loadSound("assets/birds.wav");
   song1 = loadSound("assets/breakingfree.mp3");
   sound0.loop();
   sound0.pause();
-  sound1.loop();
-  sound1.pause();
+  // sound1.loop();
+  // sound1.pause();
   sound2.loop();
   sound2.pause();
   song1.loop();
@@ -60,7 +60,7 @@ function draw() {
       timer++;
       if (timer > 30) {
         timer = 0;
-        state = 2;
+        state = 3;
       }
       break;
 
@@ -77,7 +77,7 @@ function draw() {
       timer++;
       if (timer > 30) {
         timer = 0;
-        state = 3;
+        state = 4;
       }
       break;
 
@@ -95,7 +95,7 @@ function draw() {
       timer++;
       if (timer > 30) {
         timer = 0;
-        state = 4;
+        state = 5;
       }
       break;
 
@@ -119,6 +119,11 @@ function draw() {
       break;
 
     case 6:
+      // sound1.play();
+      state = 7;
+      break;
+
+    case 7:
       background(100, 200, 255);
       noStroke();
       fill(255, 100, 100);
@@ -139,13 +144,20 @@ function draw() {
       pop();
       break;
 
-    case 7:
-      break;
-
     case 8:
+      sound2.play();
+      state = 9;
       break;
 
     case 9:
+      break;
+
+    case 10:
+      song1.play();
+      state = 11;
+      break;
+
+    case 11:
       background("blue");
       //stars
       background(0, 0, 255);
@@ -174,10 +186,10 @@ function draw() {
 
 function mouseReleased() {
   state++;
-  if (state >= 1 && state <= 5) state = 5;
-  if (state > 9) state = 0;
+  if (state >= 2 && state <= 5) state = 5;
+  if (state > 11) state = 0;
   sound0.pause();
-  sound1.pause();
+  // sound1.pause();
   sound2.pause();
   song1.pause();
 }
