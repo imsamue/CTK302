@@ -1,4 +1,5 @@
 let x = 0;
+let xoff = 0.0;
 let a = 0;
 let b = 0;
 let c = 0;
@@ -142,14 +143,32 @@ function draw() {
       b -= 4;
       if (b < -650) b = 1400;
       pop();
-      break;
 
       push();
-      scale(0.2)
-      translate(c, 400);
+      scale(0.2);
+      translate(c, 300);
       fish1();
-      c -= 6;
-      if (c < -600) c = 1300;
+      c += 9;
+      if (c > 5000) c = -600;
+      pop();
+
+      fill(0, 255, 192);
+      push();
+      scale(0.9);
+      translate(d, 100);
+      fish0();
+      d -= 5;
+      if (d < -700) d = 1250;
+      pop();
+
+      push();
+      scale(0.5);
+      translate(e, -100);
+      fish0();
+      e -= 10;
+      if (e < -1400) e = 2500;
+      pop();
+      break;
 
     case 8:
       sound2.play();
@@ -157,6 +176,15 @@ function draw() {
       break;
 
     case 9:
+      background(50, 100, 255);
+      xoff = xoff + 0.01;
+      let n = noise(xoff) * (width / 10);
+      push();
+      translate(x, n - 100);
+      bird();
+      x = x + 5;
+      if (x > 1100) x = -600
+      pop();
       break;
 
     case 10:
@@ -181,8 +209,8 @@ function draw() {
       }
       push();
       translate(x, 25);
-      x = x - 10;
-      if (x < -400) {
+      x = x - 7;
+      if (x < -450) {
         x = 1400;
       }
       sorinRun();
@@ -509,6 +537,28 @@ function fish1() {
   triangle(420, height / 2, 350, 200, 350, 300);
   fill(255);
   ellipse(560, height / 2, 15, 15);
+}
+
+function bird() {
+  noStroke();
+  fill("yellow");
+  ellipse(600, height / 2, 150, 150);
+  arc(450, height / 2, 300, 300, 0, 180);
+  fill(255, 220, 0);
+  push();
+  translate(435, 235);
+  rotate(15);
+  arc(0, 0, 200, 225, 0, 180);
+  pop();
+  fill("white");
+  ellipse(625, 235, 30, 30);
+  fill("black");
+  ellipse(625, 235, 15, 15);
+  fill("orange");
+  triangle(670, 235, 705, 250, 670, 265);
+  stroke(0);
+  strokeWeight(0.5);
+  line(670, 250, 705, 250);
 }
 
 function star(x, y, radius1, radius2, npoints) {
