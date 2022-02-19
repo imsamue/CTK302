@@ -12,8 +12,8 @@ let sound0, sound1, sound2, song1;
 function preload() {
   sound0 = loadSound("assets/crickets.wav");
   sound1 = loadSound("");
-  sound2 = loadSound("crickets.wav");
-  song1 = loadSound("breakingfree.mp3");
+  sound2 = loadSound("assets/birds.wav");
+  song1 = loadSound("assets/breakingfree.mp3");
   sound0.loop();
   sound0.pause();
   sound1.loop();
@@ -22,6 +22,7 @@ function preload() {
   sound2.pause();
   song1.loop();
   song1.pause();
+}
 
 function setup() {
   createCanvas(1000, 500);
@@ -173,8 +174,8 @@ function draw() {
 
 function mouseReleased() {
   state++;
-  if (state >= 2 && state <= 3) state = 4;
-  if (state > 8) state = 0;
+  if (state >= 1 && state <= 5) state = 5;
+  if (state > 9) state = 0;
   sound0.pause();
   sound1.pause();
   sound2.pause();
