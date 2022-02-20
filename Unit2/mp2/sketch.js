@@ -15,6 +15,12 @@ function preload() {
   sound1 = loadSound("assets/water.wav");
   sound2 = loadSound("assets/birds.wav");
   song1 = loadSound("assets/breakingfree.mp3");
+}
+
+function setup() {
+  createCanvas(1000, 500);
+  font0 = loadFont("assets/glimmer.otf");
+  font1 = loadFont("assets/type.ttf");
   sound0.loop();
   sound0.pause();
   sound1.loop();
@@ -23,12 +29,6 @@ function preload() {
   sound2.pause();
   song1.loop();
   song1.pause();
-}
-
-function setup() {
-  createCanvas(1000, 500);
-  font0 = loadFont("assets/glimmer.otf");
-  font1 = loadFont("assets/type.ttf");
   textAlign(CENTER, CENTER);
   rectMode(CENTER);
   angleMode(DEGREES);
