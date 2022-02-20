@@ -359,7 +359,7 @@ function sorinRun() {
   // back legs
   fill("white");
   push();
-  translate(200, 250, 30, 100);
+  translate(200, 250);
   rotate(60);
   ellipse(0, 0, 30, 100);
   pop();
