@@ -8,7 +8,7 @@ let font1, font2;
 function setup() {
   createCanvas(400, 400);
   font1 = loadFont("assets/dreams/caviarbold.ttf");
-  font2 = loadFont("assets/mermaid/mermaid");
+  font2 = loadFont("assets/mermaid/mermaid.ttf");
   mic = new p5.AudioIn();
   mic.start();
 }
@@ -41,34 +41,53 @@ function draw() {
   y = map(approachingVol, 0, theLoudestItGets, 0, width);
   rect(y, 270, 50, 50);
 
-
-  // this maps z to between 0 and 3 so you can switch on it.
   z = int(map(approachingVol, 0, theLoudestItGets, 0, 3));
   textFont(font2);
-  text("z = " + z, 300, 20);
+  push();
+  fill(0);
+  textAlign(RIGHT, TOP);
+  textStyle(BOLD);
+  textSize(28);
+  text("z = " + z, width - 5, 0);
+  pop();
   switch (z) {
     case 0:
       push();
+      textSize(36);
       textAlign(CENTER, CENTER);
       fill("blue");
       text("Silent", width / 2, 350);
       pop();
       break;
+
     case 1:
-      // background("green");
-      text("Quiet", 100, 350);
+      push();
+      textSize(36);
+      textAlign(CENTER, CENTER);
+      fill("green");
+      text("Quiet", width / 2, 350);
+      pop();
       break;
+
     case 2:
-      // background("yellow");
-      text("Loud", 100, 350);
+      push();
+      textSize(36);
+      textAlign(CENTER, CENTER);
+      fill("yellow");
+      text("Loud", width / 2, 350);
+      pop();
       break;
+
     default:
-      // background("red");
-      text("Too Fucking Loud", 100, 350);
+      push();
+      textSize(36);
+      textAlign(CENTER, CENTER);
+      fill("red");
+      text("TOO FUCKING LOUD", width / 2, 350);
+      pop();
       break;
   }
 }
-
 
 function touchStarted() {
   getAudioContext().resume();
