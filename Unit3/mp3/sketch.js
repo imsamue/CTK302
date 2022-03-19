@@ -1,8 +1,8 @@
 let s = 128;
 let fishes = [];
 let birds = [];
-let cars = [];
-let frogPos;
+let stars = [];
+let sorinPos;
 let font0;
 let font1;
 let font2;
@@ -18,10 +18,15 @@ function setup() {
   font0 = loadFont("assets/rumble.otf");
   font1 = loadFont("assets/neon.otf");
   font2 = loadFont("assets/Astronomus.ttf");
-  for (let i = 0; i < 40; i++) {
-    cars.push(new Car());
+
+  for (let i = 0; i < 30; i++) {
+    stars.push(new Star());
   }
-  frogPos = createVector(width / 2, height - 100);
+  for (let j = 0; j < 20; j++) {
+    fishes.push(new Fish());
+  }
+
+  sorinPos = createVector(width / 2, height - 100);
 }
 
 function draw() {
@@ -49,12 +54,14 @@ function draw() {
       strokeWeight(0.5);
       fill(226, 0, 0);
       text("Click to Start", width / 2, (height * 4) / 5);
+      timer = 0;
       break;
 
       //instruction screen
     case 1:
-      background("red");
-      
+      background(0);
+      fill(0, 255, 192);
+      fish();
       timer++;
       if (timer > 3 * 60) {
         timer = 0;
@@ -122,38 +129,59 @@ function draw() {
       timer++;
       if (timer > 10 * 60) {
         timer = 0;
-        state = 0;
+        state = 9;
       }
-      textSize(20);
-      text("Score =" + score, 25, 10)
+      if (score > 100) {
+        state = 10;
+      }
+      fill("white");
+      textFont(font1);
+      textSize(28);
+      text("Score: " + score, 100, 25);
       break;
 
+      //win
     case 9:
-      background("green");
+      background("red");
       text("You Lost!", width / 2, height / 2);
+      resetTheGame();
       break;
 
+      //lose
     case 10:
-      background("red");
+      background("green");
       text("You Won!", width / 2, height / 2);
+      resetTheGame();
       break;
   }
 }
 
 function game() {
-  background("white");
+  background("navy");
 
-  for (let i = 0; i < cars.length; i++) {
-    cars[i].display();
-    cars[i].move();
-    if (cars[i].pos.dist(frogPos) < 50) {
-      cars.splice(i, 1);
-      score++;
+  for (let i = 0; i < stars.length; i++) {
+    stars[i].display();
+    stars[i].move();
+    if (stars[i].pos.dist(sorinPos) < 50) {
+      stars.splice(i, 1);
+      score+=5;
     }
   }
 
-  fill('green');
-  ellipse(frogPos.x, frogPos.y, 50, 50);
+  for (let j = 0; j < fishes.length; j++) {
+    fishes[j].display();
+    fishes[j].move();
+    if (fishes[j].pos.dist(sorinPos) < 40) {
+      fishes.splice(j, 1);
+      score+=10;
+    }
+  }
+
+  fill("green");
+  push();
+  // scale(0.2);
+  ellipse(sorinPos.x, sorinPos.y, 50, 50);
+  pop();
   checkForKeys();
 }
 
@@ -164,7 +192,7 @@ function mouseReleased() {
       break;
 
     case 1:
-      state = 8;
+      state = 2;
       break;
 
     case 2:
@@ -191,27 +219,40 @@ function mouseReleased() {
       state = 8;
       break;
 
-    case 8:
-      state = 0
+    case 9:
+      state = 0;
+      break;
+
+    case 10:
+      state = 0;
       break;
   }
 }
 
 function checkForKeys() {
-  if (keyIsDown(LEFT_ARROW)) frogPos.x -= 5;
-  if (keyIsDown(RIGHT_ARROW)) frogPos.x += 5;
-  if (keyIsDown(UP_ARROW)) frogPos.y -= 5;
-  if (keyIsDown(DOWN_ARROW)) frogPos.y += 5;
+  if (keyIsDown(LEFT_ARROW)) sorinPos.x -= 5;
+  if (sorinPos.x < 0) sorinPos.x = width;
+  if (keyIsDown(RIGHT_ARROW)) sorinPos.x += 5;
+  if (sorinPos.x > width) sorinPos.x = 0;
+  if (keyIsDown(UP_ARROW)) sorinPos.y -= 5;
+  if (sorinPos.y < 0) sorinPos.y = 0;
+  if (keyIsDown(DOWN_ARROW)) sorinPos.y += 5;
+  if (sorinPos.y > height) sorinPos.y = height;
 }
 
 function resetTheGame() {
   timer = 0;
-  cars = [];
+  score = 0;
+  stars = [];
+  fishes = [];
   // Spawn objects
   for (let i = 0; i < 40; i++) {
-    cars.push(new Car());
+    stars.push(new Star());
   }
-  frogPos = createVector(width / 2, height - 100);
+  for (let j = 0; j < 30; j++) {
+    fishes.push(new Fish());
+  }
+  sorinPos = createVector(width / 2, height - 100);
 }
 
 //code from REAS at https://editor.p5js.org/REAS/sketches/S1TNUPzim
@@ -452,14 +493,27 @@ function sorinRun() {
   arc(200, 145, 50, 60, 20, 160, CHORD);
 }
 
-class Car {
+function fish() {
+  noStroke();
+  ellipse(width / 2, height / 2, 200, 100);
+  triangle(width / 2 + 80,
+    height / 2,
+    width / 2 + 150,
+    height / 2 - 50,
+    width / 2 + 150,
+    height / 2 + 50);
+  fill(255);
+  ellipse(width / 2 - 60, height / 2, 15, 15);
+}
+
+class Star {
   constructor() {
-    this.pos = createVector(100, 100);
-    this.v = createVector(0, random(-6));
+    this.pos = createVector(random(width), random(height));
+    this.v = createVector(random(-6, 6), random(-3, 3));
     this.r = random(255);
     this.g = random(255);
     this.b = random(255);
-    this.o = random(100);
+    this.o = random(100, 255);
     this.size = random(48, 128);
   }
 
@@ -479,37 +533,20 @@ class Car {
   }
 }
 
-class Bird {
+class Fish {
   constructor() {
-    this.pos = createVector(100, 100);
+    this.pos = createVector(width / 2, height / 2);
     this.v = createVector(0, random(-6));
-    this.r = random(255);
-    this.g = random(255);
-    this.b = random(255);
+    this.r = random(100, 255);
+    this.g = random(100, 255);
+    this.b = random(100, 255);
     this.o = random(100);
     this.size = random(48, 128);
   }
 
   display() {
-    noStroke();
-    fill("yellow");
-    ellipse(600, height / 2, 150, 150);
-    arc(450, height / 2, 300, 300, 0, 180);
-    fill(255, 220, 0);
-    push();
-    translate(435, 235);
-    rotate(15);
-    arc(0, 0, 200, 225, 0, 180);
-    pop();
-    fill("white");
-    ellipse(625, 235, 30, 30);
-    fill("black");
-    ellipse(625, 235, 15, 15);
-    fill("orange");
-    triangle(670, 235, 705, 250, 670, 265);
-    stroke(0);
-    strokeWeight(0.5);
-    line(670, 250, 705, 250);
+    fill(this.r, this.g, this.b);
+    fish(this.pos.x, this.pos.y);
   }
 
   move() {
