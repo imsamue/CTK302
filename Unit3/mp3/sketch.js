@@ -6,6 +6,7 @@ let sorinPos;
 let font0;
 let font1;
 let font2;
+let font3;
 let state = 0;
 let timer = 0;
 let score = 0;
@@ -18,6 +19,7 @@ function setup() {
   font0 = loadFont("assets/rumble.otf");
   font1 = loadFont("assets/neon.otf");
   font2 = loadFont("assets/Astronomus.ttf");
+  font3 = loadFont("assets/Gameplay.ttf");
 
   for (let i = 0; i < 30; i++) {
     stars.push(new Star());
@@ -42,6 +44,11 @@ function draw() {
       scale(0.8);
       sorinSit();
       pop();
+      push();
+      translate(550, 200);
+      scale(0.8);
+      bowl();
+      pop();
       fill("white");
       textSize(112);
       textFont(font0);
@@ -59,11 +66,32 @@ function draw() {
 
       //instruction screen
     case 1:
-      background(0);
+      background(0, 0, 32);
+      textFont(font3);
+      textSize(36);
+      fill("red");
+      text("Help  Sorin  fill  his  Tummy  by  eating\nstars,  fishes,  and  birds", width / 2, 50);
+      fill("yellow");
+      textSize(28);
+      text("But  hurry!  Because  you  only  have  10  seconds  to  get  500  points", width / 2, 150);
+      fill (255, 128, 128);
+      star(width / 3, height / 2 - 25, 40, 20, 5);
       fill(0, 255, 192);
+      push();
+      scale(0.5);
+      translate(200, 475);
       fish();
+      pop();
+      fill("white");
+      textSize(36);
+      push();
+      textAlign(LEFT);
+      text("=    10 pts", width / 2, height / 2 - 25);
+      text("=    20 pts", width / 2, height / 2 + 90);
+      text("=    30 pts", width / 2, height / 2 + 210);
+      pop();
       timer++;
-      if (timer > 3 * 60) {
+      if (timer > 5 * 60) {
         timer = 0;
         state = 3;
       }
@@ -131,7 +159,7 @@ function draw() {
         timer = 0;
         state = 9;
       }
-      if (score > 100) {
+      if (score > 500) {
         state = 10;
       }
       fill("white");
@@ -164,23 +192,23 @@ function game() {
     stars[i].move();
     if (stars[i].pos.dist(sorinPos) < 50) {
       stars.splice(i, 1);
-      score+=5;
+      score += 10;
     }
   }
 
-  for (let j = 0; j < fishes.length; j++) {
-    fishes[j].display();
-    fishes[j].move();
-    if (fishes[j].pos.dist(sorinPos) < 40) {
-      fishes.splice(j, 1);
-      score+=10;
-    }
-  }
+  // for (let j = 0; j < fishes.length; j++) {
+  //   fishes[j].display();
+  //   fishes[j].move();
+  //   if (fishes[j].pos.dist(sorinPos) < 40) {
+  //     fishes.splice(j, 1);
+  //     score += 20;
+  //   }
+  // }
 
   fill("green");
   push();
   // scale(0.2);
-  ellipse(sorinPos.x, sorinPos.y, 50, 50);
+  ellipse(sorinPos.x, sorinPos.y, 50);
   pop();
   checkForKeys();
 }
@@ -264,6 +292,27 @@ function setGradient(c1, c2) {
     stroke(c);
     line(0, y, width, y);
   }
+}
+
+function bowl() {
+  noStroke();
+  fill(255, 0, 0);
+  quad(
+    width / 2 - 75,
+    height / 2 - 6,
+    width / 2 + 75,
+    height / 2 - 6,
+    width / 2 + 93.5,
+    height / 2 + 50,
+    width / 2 - 93.5,
+    height / 2 + 50
+  );
+  arc(width / 2, height / 2 + 50, 185, 75, 0, 180, OPEN);
+  fill(208, 0, 0);
+  ellipse(width / 2, height / 2, 150, 75);
+  strokeWeight(3);
+  stroke(64);
+  arc(width / 2, height / 2 + 25, 100, 50, 180, 0, OPEN);
 }
 
 function sorinSit() {
@@ -493,6 +542,21 @@ function sorinRun() {
   arc(200, 145, 50, 60, 20, 160, CHORD);
 }
 
+function star(x, y, radius1, radius2, npoints) {
+  let angle = 360 / npoints;
+  let halfAngle = angle / 2.0;
+  beginShape();
+  for (let a = 0; a < 360; a += angle) {
+    let sx = x + cos(a) * radius2;
+    let sy = y + sin(a) * radius2;
+    vertex(sx, sy);
+    sx = x + cos(a + halfAngle) * radius1;
+    sy = y + sin(a + halfAngle) * radius1;
+    vertex(sx, sy);
+  }
+  endShape(CLOSE);
+}
+
 function fish() {
   noStroke();
   ellipse(width / 2, height / 2, 200, 100);
@@ -510,18 +574,15 @@ class Star {
   constructor() {
     this.pos = createVector(random(width), random(height));
     this.v = createVector(random(-6, 6), random(-3, 3));
-    this.r = random(255);
-    this.g = random(255);
-    this.b = random(255);
-    this.o = random(100, 255);
-    this.size = random(48, 128);
+    this.r = random(64, 255);
+    this.g = random(64, 255);
+    this.b = random(64, 255);
+    this.o = random(192, 255);
   }
 
   display() {
     fill(this.r, this.b, this.g, this.o);
-    rect(this.pos.x, this.pos.y, 75, 25);
-    ellipse(this.pos.x, this.pos.y + 40, 30, 30);
-    ellipse(this.pos.x + 70, this.pos.y + 40, 30, 30);
+    star(this.pos.x, this.pos.y, 30, 15, 5);
   }
 
   move() {
@@ -535,13 +596,12 @@ class Star {
 
 class Fish {
   constructor() {
-    this.pos = createVector(width / 2, height / 2);
-    this.v = createVector(0, random(-6));
-    this.r = random(100, 255);
-    this.g = random(100, 255);
-    this.b = random(100, 255);
-    this.o = random(100);
-    this.size = random(48, 128);
+    this.pos = createVector(random(width), random(height));
+    this.v = createVector(random(-6, 6), random(-4, 4));
+    this.r = random(128, 255);
+    this.g = random(128, 255);
+    this.b = random(128, 255);
+    this.o = random(192, 255);
   }
 
   display() {
