@@ -8,6 +8,7 @@ let font1;
 let font2;
 let font3;
 let fishpic;
+let birdpic;
 let state = 0;
 let timer = 0;
 let score = 0;
@@ -23,6 +24,7 @@ function setup() {
   font2 = loadFont("assets/Astronomus.ttf");
   font3 = loadFont("assets/Gameplay.ttf");
   fishpic = loadImage("assets/fish.png");
+  birdpic = loadImage("assets/bird.png");
 
   for (let i = 0; i < 30; i++) {
     stars.push(new Star());
@@ -118,7 +120,7 @@ function draw() {
       fill("white");
       background("red");
       textSize(s);
-      s += 2;
+      s += 3;
       textFont(font1);
       text("3", width / 2, height / 2);
       timer++;
@@ -136,7 +138,7 @@ function draw() {
     case 5:
       background("red");
       textSize(s);
-      s += 2;
+      s += 3;
       text("2", width / 2, height / 2);
       timer++;
       if (timer > 1 * 60) {
@@ -153,7 +155,7 @@ function draw() {
     case 7:
       background("red");
       textSize(s);
-      s += 2;
+      s += 3;
       text("1", width / 2, height / 2);
       timer++;
       if (timer > 1 * 60) {
@@ -174,14 +176,17 @@ function draw() {
         state = 10;
       }
       fill("white");
-      textFont(font1);
+      textFont(font3);
       textSize(28);
       text("Score: " + score, 100, 25);
+      if (timer => (7 * 60)) fill("red");
+      text("Time: " + (timer / 60), width - 100, 25);
       break;
 
       //win
     case 9:
       background("red");
+      fill ("white");
       text("You Lost!", width / 2, height / 2);
       resetTheGame();
       break;
@@ -620,9 +625,9 @@ class Star {
   constructor() {
     this.pos = createVector(random(width), random(height));
     this.v = createVector(random(-6, 6), random(-3, 3));
-    this.r = random(128, 255);
-    this.g = random(128, 255);
-    this.b = random(128, 255);
+    this.r = random(64, 255);
+    this.g = random(64, 255);
+    this.b = random(64, 255);
     this.o = random(208, 255);
   }
 
@@ -667,15 +672,13 @@ class Bird {
   constructor() {
     this.pos = createVector(random(width), random(height));
     this.v = createVector(random(-6, 6), random(-4, 4));
-    this.r = random(128, 255);
-    this.g = random(128, 255);
-    this.b = random(128, 255);
-    this.o = random(192, 255);
+    this.r = random(192, 255);
+    this.g = random(192, 255);
   }
 
   display() {
-    fill(this.r, this.g, this.b);
-    bird(this.pos.x, this.pos.y);
+    tint(this.r, this.g, 255);
+    image(birdpic, this.pos.x, this.pos.y, 100, 50);
   }
 
   move() {
