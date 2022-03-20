@@ -30,13 +30,13 @@ function setup() {
   rectMode(CENTER);
   imageMode(CENTER);
 
-  for (let i = 0; i < 30; i++) {
+  for (let i = 0; i < 20; i++) {
     stars.push(new Star());
   }
-  for (let j = 0; j < 20; j++) {
+  for (let j = 0; j < 15; j++) {
     fishes.push(new Fish());
   }
-  for (let k = 0; k < 15; k++) {
+  for (let k = 0; k < 10; k++) {
     birds.push(new Bird());
   }
   sorinPos = createVector(width / 2, height - 100);
@@ -642,7 +642,7 @@ class Star {
   }
 
   display() {
-    fill(this.r, this.b, this.g, this.o);
+    fill(this.r, this.g, this.b, this.o);
     star(this.pos.x, this.pos.y, 30, 15, 5);
   }
 
