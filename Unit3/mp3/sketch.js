@@ -7,6 +7,7 @@ let font0;
 let font1;
 let font2;
 let font3;
+let fishpic;
 let state = 0;
 let timer = 0;
 let score = 0;
@@ -16,10 +17,12 @@ function setup() {
   angleMode(DEGREES);
   textAlign(CENTER, CENTER);
   rectMode(CENTER);
+  imageMode(CENTER);
   font0 = loadFont("assets/rumble.otf");
   font1 = loadFont("assets/neon.otf");
   font2 = loadFont("assets/Astronomus.ttf");
   font3 = loadFont("assets/Gameplay.ttf");
+  fishpic = loadImage("assets/fish.png");
 
   for (let i = 0; i < 30; i++) {
     stars.push(new Star());
@@ -27,7 +30,9 @@ function setup() {
   for (let j = 0; j < 20; j++) {
     fishes.push(new Fish());
   }
-
+  for (let k = 0; k < 15; k++) {
+    birds.push(new Bird());
+  }
   sorinPos = createVector(width / 2, height - 100);
 }
 
@@ -74,27 +79,33 @@ function draw() {
       fill("yellow");
       textSize(28);
       text("But  hurry!  Because  you  only  have  10  seconds  to  get  500  points", width / 2, 150);
-      fill (255, 128, 128);
+      //game pieces
+      fill(255, 128, 128);
       star(width / 3, height / 2 - 25, 40, 20, 5);
       fill(0, 255, 192);
       push();
-      scale(0.5);
-      translate(200, 475);
+      translate(165, 265);
       fish();
       pop();
+      push();
+      scale(0.3);
+      translate(950, 1350);
+      bird();
+      pop();
+      //point values
       fill("white");
       textSize(36);
       push();
       textAlign(LEFT);
-      text("=    10 pts", width / 2, height / 2 - 25);
-      text("=    20 pts", width / 2, height / 2 + 90);
-      text("=    30 pts", width / 2, height / 2 + 210);
+      text("=          10 pts", width / 2, height / 2 - 25);
+      text("=          20 pts", width / 2, height / 2 + 90);
+      text("=          30 pts", width / 2, height / 2 + 210);
       pop();
-      timer++;
-      if (timer > 5 * 60) {
-        timer = 0;
-        state = 3;
-      }
+      // timer++;
+      // if (timer > 5 * 60) {
+      //   timer = 0;
+      //   state = 3;
+      // }
       break;
 
       //start countdown
@@ -196,19 +207,29 @@ function game() {
     }
   }
 
-  // for (let j = 0; j < fishes.length; j++) {
-  //   fishes[j].display();
-  //   fishes[j].move();
-  //   if (fishes[j].pos.dist(sorinPos) < 40) {
-  //     fishes.splice(j, 1);
-  //     score += 20;
-  //   }
-  // }
+  for (let j = 0; j < fishes.length; j++) {
+    fishes[j].display();
+    fishes[j].move();
+    if (fishes[j].pos.dist(sorinPos) < 40) {
+      fishes.splice(j, 1);
+      score += 20;
+    }
+  }
 
-  fill("green");
+  for (let k = 0; k < birds.length; k++) {
+    birds[k].display();
+    birds[k].move();
+    if (birds[k].pos.dist(sorinPos) < 30) {
+      birds.splice(k, 1);
+      score += 30;
+    }
+  }
   push();
-  // scale(0.2);
-  ellipse(sorinPos.x, sorinPos.y, 50);
+  // scale(0.4);
+  translate(sorinPos.x, sorinPos.y);
+  fill("green");
+  ellipse(0, 0, 50)
+  // sorinRun();
   pop();
   checkForKeys();
 }
@@ -558,7 +579,9 @@ function star(x, y, radius1, radius2, npoints) {
 }
 
 function fish() {
+  push();
   noStroke();
+  scale(0.4);
   ellipse(width / 2, height / 2, 200, 100);
   triangle(width / 2 + 80,
     height / 2,
@@ -566,18 +589,41 @@ function fish() {
     height / 2 - 50,
     width / 2 + 150,
     height / 2 + 50);
-  fill(255);
+  fill(0);
   ellipse(width / 2 - 60, height / 2, 15, 15);
+  pop();
+}
+
+function bird() {
+  noStroke();
+  fill("yellow");
+  ellipse(600, 250, 150, 150);
+  arc(450, 250, 300, 300, 0, 180);
+  fill(255, 220, 0);
+  push();
+  translate(435, 235);
+  rotate(15);
+  arc(0, 0, 200, 225, 0, 180);
+  pop();
+  fill("white");
+  ellipse(625, 235, 30, 30);
+  fill("black");
+  ellipse(625, 235, 15, 15);
+  fill("orange");
+  triangle(670, 235, 705, 250, 670, 265);
+  stroke(0);
+  strokeWeight(0.5);
+  line(670, 250, 705, 250);
 }
 
 class Star {
   constructor() {
     this.pos = createVector(random(width), random(height));
     this.v = createVector(random(-6, 6), random(-3, 3));
-    this.r = random(64, 255);
-    this.g = random(64, 255);
-    this.b = random(64, 255);
-    this.o = random(192, 255);
+    this.r = random(128, 255);
+    this.g = random(128, 255);
+    this.b = random(128, 255);
+    this.o = random(208, 255);
   }
 
   display() {
@@ -598,6 +644,29 @@ class Fish {
   constructor() {
     this.pos = createVector(random(width), random(height));
     this.v = createVector(random(-6, 6), random(-4, 4));
+    this.r = random(255);
+    this.g = random(128, 255);
+    this.b = random(128, 255);
+  }
+
+  display() {
+    tint(this.r, this.g, this.b);
+    image(fishpic, this.pos.x, this.pos.y, 80, 40);
+  }
+
+  move() {
+    this.pos.add(this.v);
+    if (this.pos.x > width) this.pos.x = 0;
+    if (this.pos.x < 0) this.pos.x = width;
+    if (this.pos.y > height) this.pos.y = 0;
+    if (this.pos.y < 0) this.pos.y = height;
+  }
+}
+
+class Bird {
+  constructor() {
+    this.pos = createVector(random(width), random(height));
+    this.v = createVector(random(-6, 6), random(-4, 4));
     this.r = random(128, 255);
     this.g = random(128, 255);
     this.b = random(128, 255);
@@ -606,7 +675,7 @@ class Fish {
 
   display() {
     fill(this.r, this.g, this.b);
-    fish(this.pos.x, this.pos.y);
+    bird(this.pos.x, this.pos.y);
   }
 
   move() {
