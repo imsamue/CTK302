@@ -9,6 +9,8 @@ let font2;
 let font3;
 let fishpic;
 let birdpic;
+let sorinpic;
+let bowlpic;
 let state = 0;
 let timer = 0;
 let score = 0;
@@ -21,6 +23,8 @@ function preload() {
   font3 = loadFont("assets/Gameplay.ttf");
   fishpic = loadImage("assets/fish.png");
   birdpic = loadImage("assets/bird.png");
+  sorinpic = loadImage("assets/sorin.png");
+  bowlpic = loadImage("assets/bowl.png");
 }
 
 function setup() {
@@ -30,13 +34,13 @@ function setup() {
   rectMode(CENTER);
   imageMode(CENTER);
 
-  for (let i = 0; i < 20; i++) {
+  for (let i = 0; i < 25; i++) {
     stars.push(new Star());
   }
-  for (let j = 0; j < 15; j++) {
+  for (let j = 0; j < 20; j++) {
     fishes.push(new Fish());
   }
-  for (let k = 0; k < 10; k++) {
+  for (let k = 0; k < 15; k++) {
     birds.push(new Bird());
   }
   sorinPos = createVector(width / 2, height - 100);
@@ -51,8 +55,8 @@ function draw() {
       c2 = color(50, 0, 192);
       setGradient(c1, c2);
       push();
-      translate(0, height / 2.5);
-      scale(0.8);
+      translate(0, 125);
+      scale(1.1);
       sorinSit();
       pop();
       push();
@@ -88,15 +92,16 @@ function draw() {
       //game pieces
       fill(255, 128, 128);
       star(width / 3, height / 2 - 25, 40, 20, 5);
-      fill(0, 255, 192);
+
+      tint(255);
       push();
-      translate(165, 265);
-      fish();
+      translate(width / 3, height / 2 + 90);
+      image(fishpic, 0, 0, 100, 50);
       pop();
+
       push();
-      scale(0.3);
-      translate(950, 1350);
-      bird();
+      translate(width / 3, height / 2 + 210);
+      image(birdpic, 0, 0, 120, 60);
       pop();
       //point values
       fill("white");
@@ -107,11 +112,11 @@ function draw() {
       text("=          20 pts", width / 2, height / 2 + 90);
       text("=          30 pts", width / 2, height / 2 + 210);
       pop();
-      // timer++;
-      // if (timer > 5 * 60) {
-      //   timer = 0;
-      //   state = 3;
-      // }
+      timer++;
+      if (timer > 5 * 60) {
+        timer = 0;
+        state = 3;
+      }
       break;
 
       //start countdown
@@ -176,7 +181,7 @@ function draw() {
         timer = 0;
         state = 9;
       }
-      if (score > 500) {
+      if (score >= 500) {
         state = 10;
       }
       fill("white");
@@ -193,17 +198,46 @@ function draw() {
       text("Time: " + sec, width - 100, 25);
       break;
 
-      //win
+      //lose
     case 9:
-      background("red");
+    c1 = color(0);
+    c2 = color(64, 0, 0);
+    setGradient(c1, c2);
+      for (var a = 0; a < 2000; a += 100)
+        for (var b = 0; b < 2000; b += 75) {
+          image(bowlpic, a + 50, b + 25, 75, 50);
+        }
+      textFont(font0);
+      strokeWeight(2);
+      textSize(200);
       fill("white");
       text("You Lost!", width / 2, height / 2);
       resetTheGame();
       break;
 
-      //lose
+      //win
     case 10:
-      background("green");
+      c1 = color(0, 255, 0);
+      c2 = color(0, 96, 0);
+      setGradient(c1, c2);
+      fill(255, 255, 0, 116);
+
+      for (var a = 0; a < 2000; a += 100)
+        for (var b = 0; b < 2000; b += 100) {
+          push();
+          translate(a + 25, b);
+          rotate(degrees(frameCount / 200));
+          star(0, 0, 30, 15, 7);
+          pop();
+        }
+
+      push();
+      translate(0, 80);
+      sorinSit();
+      pop();
+      textFont(font0);
+      textSize(200);
+      fill("black");
       text("You Won!", width / 2, height / 2);
       resetTheGame();
       break;
@@ -239,13 +273,8 @@ function game() {
       score += 30;
     }
   }
-  push();
-  // scale(0.4);
-  translate(sorinPos.x, sorinPos.y);
-  fill("green");
-  ellipse(0, 0, 50)
-  // sorinRun();
-  pop();
+  tint(255, 255, 255);
+  image(sorinpic, sorinPos.x, sorinPos.y, 140, 120);
   checkForKeys();
 }
 
@@ -441,143 +470,6 @@ function sorinSit() {
   ellipse(220, 280, 30, 100);
 }
 
-function sorinRun() {
-  //tail
-  fill(0);
-  push();
-  translate(420, 260);
-  rotate(80);
-  ellipse(0, 0, 20, 60);
-  pop();
-  ellipse(447, 241, 15, 35);
-
-  // back legs
-  fill("white");
-  push();
-  translate(200, 250);
-  rotate(60);
-  ellipse(0, 0, 30, 100);
-  pop();
-  ellipse(350, 300, 30, 100);
-
-  //body
-  noStroke();
-  fill(255);
-  push();
-  translate(295, 235);
-  rotate(-75);
-  ellipse(0, 0, 110, 220);
-  pop();
-
-  // front legs
-  stroke(100);
-  strokeWeight(0.5);
-  push();
-  translate(200, 280);
-  rotate(30);
-  ellipse(0, 0, 30, 100);
-  pop();
-  push();
-  translate(310, 300);
-  rotate(55);
-  ellipse(0, 0, 30, 100);
-  pop();
-
-  //head
-  noStroke();
-  fill(255);
-  ellipse(200, 133, 120, 120);
-
-  //nose
-  fill("pink");
-  triangle(200, 133, 190, 143, 210, 143);
-
-  //black fur patches
-  fill(0);
-  beginShape();
-  curveVertex(200, 72);
-  curveVertex(205, 72);
-  curveVertex(210, 100);
-  curveVertex(204, 120);
-  curveVertex(220, 130);
-  curveVertex(260, 120);
-  curveVertex(240, 90);
-  endShape();
-  arc(200, 133, 120, 120, -84, -11, OPEN);
-
-  beginShape();
-  curveVertex(200, 72);
-  curveVertex(195, 72);
-  curveVertex(190, 100);
-  curveVertex(196, 120);
-  curveVertex(180, 130);
-  curveVertex(140, 120);
-  curveVertex(160, 90);
-  endShape();
-  arc(200, 133, 120, 120, 191, 264, OPEN);
-
-  push();
-  translate(0, 5);
-  beginShape();
-  curveVertex(240, 160);
-  curveVertex(260, 177);
-  curveVertex(250, 210);
-  curveVertex(270, 230);
-  curveVertex(300, 260);
-  curveVertex(340, 250);
-  curveVertex(370, 260);
-  curveVertex(400, 260);
-  curveVertex(400, 260);
-  curveVertex(420, 260);
-  endShape();
-  pop();
-
-  push();
-  translate(280, 244);
-  rotate(15);
-  arc(0, 0, 280, 140, -120, 355)
-  pop();
-
-  push();
-  translate(258, 186);
-  rotate(-30);
-  ellipse(0, 0, 30, 40);
-  pop();
-
-  //ears
-  fill("black");
-  triangle(140, 60, 150, 110, 175, 80);
-  triangle(260, 60, 255, 110, 225, 80);
-  fill("pink");
-  triangle(148, 70, 155, 95, 170, 85);
-  triangle(252, 70, 250, 95, 230, 85);
-
-  //eyes
-  strokeWeight(0.25);
-  stroke(0);
-  fill(230, 230, 0);
-  ellipse(180, 115, 25, 15);
-  ellipse(220, 115, 25, 15);
-  fill(0);
-  ellipse(180, 115, 5, 10);
-  ellipse(220, 115, 5, 10);
-
-  //whiskers
-  strokeWeight(1);
-  stroke(180);
-  line(190, 142, 150, 150);
-  line(210, 142, 250, 150);
-  line(190, 139, 150, 139);
-  line(210, 139, 250, 139);
-  line(190, 136, 150, 128);
-  line(210, 136, 250, 128);
-
-  //mouth
-  stroke(0);
-  fill(200, 0, 100);
-  arc(200, 145, 50, 60, 20, 160, CHORD);
-}
-
 function star(x, y, radius1, radius2, npoints) {
   let angle = 360 / npoints;
   let halfAngle = angle / 2.0;
@@ -591,44 +483,6 @@ function star(x, y, radius1, radius2, npoints) {
     vertex(sx, sy);
   }
   endShape(CLOSE);
-}
-
-function fish() {
-  push();
-  noStroke();
-  scale(0.4);
-  ellipse(width / 2, height / 2, 200, 100);
-  triangle(width / 2 + 80,
-    height / 2,
-    width / 2 + 150,
-    height / 2 - 50,
-    width / 2 + 150,
-    height / 2 + 50);
-  fill(0);
-  ellipse(width / 2 - 60, height / 2, 15, 15);
-  pop();
-}
-
-function bird() {
-  noStroke();
-  fill("yellow");
-  ellipse(600, 250, 150, 150);
-  arc(450, 250, 300, 300, 0, 180);
-  fill(255, 220, 0);
-  push();
-  translate(435, 235);
-  rotate(15);
-  arc(0, 0, 200, 225, 0, 180);
-  pop();
-  fill("white");
-  ellipse(625, 235, 30, 30);
-  fill("black");
-  ellipse(625, 235, 15, 15);
-  fill("orange");
-  triangle(670, 235, 705, 250, 670, 265);
-  stroke(0);
-  strokeWeight(0.5);
-  line(670, 250, 705, 250);
 }
 
 class Star {
