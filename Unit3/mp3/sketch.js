@@ -12,6 +12,16 @@ let birdpic;
 let state = 0;
 let timer = 0;
 let score = 0;
+p5.disableFriendlyErrors = true;
+
+function preload() {
+  font0 = loadFont("assets/rumble.otf");
+  font1 = loadFont("assets/neon.otf");
+  font2 = loadFont("assets/Astronomus.ttf");
+  font3 = loadFont("assets/Gameplay.ttf");
+  fishpic = loadImage("assets/fish.png");
+  birdpic = loadImage("assets/bird.png");
+}
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -19,12 +29,6 @@ function setup() {
   textAlign(CENTER, CENTER);
   rectMode(CENTER);
   imageMode(CENTER);
-  font0 = loadFont("assets/rumble.otf");
-  font1 = loadFont("assets/neon.otf");
-  font2 = loadFont("assets/Astronomus.ttf");
-  font3 = loadFont("assets/Gameplay.ttf");
-  fishpic = loadImage("assets/fish.png");
-  birdpic = loadImage("assets/bird.png");
 
   for (let i = 0; i < 30; i++) {
     stars.push(new Star());
@@ -179,14 +183,20 @@ function draw() {
       textFont(font3);
       textSize(28);
       text("Score: " + score, 100, 25);
-      if (timer => (7 * 60)) fill("red");
-      text("Time: " + (timer / 60), width - 100, 25);
+      let t = timer / 60;
+      let sec = round(t, 2);
+      if (timer > (7 * 60)) {
+        fill("red");
+      } else {
+        fill("white");
+      }
+      text("Time: " + sec, width - 100, 25);
       break;
 
       //win
     case 9:
       background("red");
-      fill ("white");
+      fill("white");
       text("You Lost!", width / 2, height / 2);
       resetTheGame();
       break;
@@ -625,9 +635,9 @@ class Star {
   constructor() {
     this.pos = createVector(random(width), random(height));
     this.v = createVector(random(-6, 6), random(-3, 3));
-    this.r = random(64, 255);
-    this.g = random(64, 255);
-    this.b = random(64, 255);
+    this.r = random(128, 255);
+    this.g = random(64, 128);
+    this.b = random(64, 128);
     this.o = random(208, 255);
   }
 
