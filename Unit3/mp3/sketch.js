@@ -108,9 +108,9 @@ function draw() {
       textSize(36);
       push();
       textAlign(LEFT);
-      text("=          10 pts", width / 2, height / 2 - 25);
-      text("=          20 pts", width / 2, height / 2 + 90);
-      text("=          30 pts", width / 2, height / 2 + 210);
+      text("=          15 pts", width / 2, height / 2 - 25);
+      text("=          25 pts", width / 2, height / 2 + 90);
+      text("=          40 pts", width / 2, height / 2 + 210);
       pop();
       timer++;
       if (timer > 5 * 60) {
@@ -252,7 +252,7 @@ function game() {
     stars[i].move();
     if (stars[i].pos.dist(sorinPos) < 50) {
       stars.splice(i, 1);
-      score += 10;
+      score += 15;
     }
   }
 
@@ -261,7 +261,7 @@ function game() {
     fishes[j].move();
     if (fishes[j].pos.dist(sorinPos) < 44) {
       fishes.splice(j, 1);
-      score += 20;
+      score += 25;
     }
   }
 
@@ -270,7 +270,7 @@ function game() {
     birds[k].move();
     if (birds[k].pos.dist(sorinPos) < 36) {
       birds.splice(k, 1);
-      score += 30;
+      score += 40;
     }
   }
   tint(255, 255, 255);
