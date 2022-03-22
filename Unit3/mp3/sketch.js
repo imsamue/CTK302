@@ -21,10 +21,10 @@ function preload() {
   font1 = loadFont("assets/neon.otf");
   font2 = loadFont("assets/Astronomus.ttf");
   font3 = loadFont("assets/Gameplay.ttf");
-  fishpic = loadImage("assets/fish.png");
-  birdpic = loadImage("assets/bird.png");
-  sorinpic = loadImage("assets/sorin.png");
-  bowlpic = loadImage("assets/bowl.png");
+  fishpic = loadImage("assets/fishsmall.png");
+  birdpic = loadImage("assets/birdsmall.png");
+  sorinpic = loadImage("assets/sorinsmall.png");
+  bowlpic = loadImage("assets/bowlsmall.png");
 }
 
 function setup() {
