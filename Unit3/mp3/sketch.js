@@ -225,7 +225,7 @@ function draw() {
       for (var a = 0; a < 2000; a += 100)
         for (var b = 0; b < 2000; b += 100) {
           push();
-          translate(a + 25, b);
+          translate(a + 25, b + 25);
           rotate(degrees(frameCount / 200));
           star(0, 0, 30, 15, 7);
           pop();
@@ -259,7 +259,7 @@ function game() {
   for (let j = 0; j < fishes.length; j++) {
     fishes[j].display();
     fishes[j].move();
-    if (fishes[j].pos.dist(sorinPos) < 40) {
+    if (fishes[j].pos.dist(sorinPos) < 44) {
       fishes.splice(j, 1);
       score += 20;
     }
@@ -268,13 +268,13 @@ function game() {
   for (let k = 0; k < birds.length; k++) {
     birds[k].display();
     birds[k].move();
-    if (birds[k].pos.dist(sorinPos) < 30) {
+    if (birds[k].pos.dist(sorinPos) < 36) {
       birds.splice(k, 1);
       score += 30;
     }
   }
   tint(255, 255, 255);
-  image(sorinpic, sorinPos.x, sorinPos.y, 140, 120);
+  image(sorinpic, sorinPos.x, sorinPos.y, 160, 140);
   checkForKeys();
 }
 
@@ -323,13 +323,13 @@ function mouseReleased() {
 }
 
 function checkForKeys() {
-  if (keyIsDown(LEFT_ARROW)) sorinPos.x -= 5;
+  if (keyIsDown(LEFT_ARROW)) sorinPos.x -= 4;
   if (sorinPos.x < 0) sorinPos.x = width;
-  if (keyIsDown(RIGHT_ARROW)) sorinPos.x += 5;
+  if (keyIsDown(RIGHT_ARROW)) sorinPos.x += 4;
   if (sorinPos.x > width) sorinPos.x = 0;
-  if (keyIsDown(UP_ARROW)) sorinPos.y -= 5;
+  if (keyIsDown(UP_ARROW)) sorinPos.y -= 4;
   if (sorinPos.y < 0) sorinPos.y = 0;
-  if (keyIsDown(DOWN_ARROW)) sorinPos.y += 5;
+  if (keyIsDown(DOWN_ARROW)) sorinPos.y += 4;
   if (sorinPos.y > height) sorinPos.y = height;
 }
 
@@ -493,7 +493,7 @@ function star(x, y, radius1, radius2, npoints) {
 class Star {
   constructor() {
     this.pos = createVector(random(width), random(height));
-    this.v = createVector(random(-6, 6), random(-3, 3));
+    this.v = createVector(random(-3, 3), random(-1.5, 1.5));
     this.r = random(128, 255);
     this.g = random(64, 128);
     this.b = random(64, 128);
@@ -517,7 +517,7 @@ class Star {
 class Fish {
   constructor() {
     this.pos = createVector(random(width), random(height));
-    this.v = createVector(random(-6, 6), random(-4, 4));
+    this.v = createVector(random(-4, 4), random(-2, 2));
     this.r = random(255);
     this.g = random(128, 255);
     this.b = random(128, 255);
@@ -540,7 +540,7 @@ class Fish {
 class Bird {
   constructor() {
     this.pos = createVector(random(width), random(height));
-    this.v = createVector(random(-6, 6), random(-4, 4));
+    this.v = createVector(random(-5, 5), random(-2.5, 2.5));
     this.r = random(192, 255);
     this.g = random(192, 255);
   }
