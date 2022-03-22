@@ -200,9 +200,9 @@ function draw() {
 
       //lose
     case 9:
-    c1 = color(0);
-    c2 = color(64, 0, 0);
-    setGradient(c1, c2);
+      c1 = color(0);
+      c2 = color(64, 0, 0);
+      setGradient(c1, c2);
       for (var a = 0; a < 2000; a += 100)
         for (var b = 0; b < 2000; b += 75) {
           image(bowlpic, a + 50, b + 25, 75, 50);
@@ -338,13 +338,18 @@ function resetTheGame() {
   score = 0;
   stars = [];
   fishes = [];
+  birds = [];
   // Spawn objects
-  for (let i = 0; i < 40; i++) {
+  for (let i = 0; i < 25; i++) {
     stars.push(new Star());
   }
-  for (let j = 0; j < 30; j++) {
+  for (let j = 0; j < 20; j++) {
     fishes.push(new Fish());
   }
+  for (let k = 0; k < 15; k++) {
+    birds.push(new Bird());
+  }
+
   sorinPos = createVector(width / 2, height - 100);
 }
 
