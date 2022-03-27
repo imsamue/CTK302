@@ -175,6 +175,18 @@ function draw() {
 
       //game
     case 8:
+      c1 = color(0, 0, 80);
+      c2 = color(50, 160, 255);
+      setGradient(c1, c2);
+
+      push();
+      scale(2);
+      cloud(50, 100, 2);
+      cloud(375, 45, 2);
+      cloud(500, 90, 2.5);
+      cloud(width / 6, 75, 2.25);
+      pop();
+
       game();
       timer++;
       if (timer > 10 * 60) {
@@ -245,7 +257,6 @@ function draw() {
 }
 
 function game() {
-  background("navy");
 
   for (let i = 0; i < stars.length; i++) {
     stars[i].display();
@@ -274,7 +285,7 @@ function game() {
     }
   }
   tint(255, 255, 255);
-  image(sorinpic, sorinPos.x, sorinPos.y, 160, 140);
+  image(sorinpic, sorinPos.x, sorinPos.y, 150, 130);
   checkForKeys();
 }
 
@@ -362,6 +373,16 @@ function setGradient(c1, c2) {
     stroke(c);
     line(0, y, width, y);
   }
+}
+
+//code from jackiezen at https://editor.p5js.org/jackiezen/sketches/rJEziNOR
+function cloud(x, y, size) {
+  fill(255, 192);
+  noStroke();
+  arc(x, y, 25 * size, 20 * size, 180 + 360, 360);
+  arc(x + 10, y, 25 * size, 45 * size, PI + 180 + 360, 360);
+  arc(x + 25, y, 25 * size, 35 * size, PI + 180 + 360, 360);
+  arc(x + 40, y, 30 * size, 20 * size, PI + 180 + 360, 360);
 }
 
 function bowl() {
