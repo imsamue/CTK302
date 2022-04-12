@@ -2,7 +2,7 @@ var bubbles = [];
 let url = "";
 
 function setup() {
-  let key = "1xG5lzBtJV3gK61ZE_qdku3ms9-pCJqwl0T8RVHI11m0"; // this is KEY of the URL from the sheet
+  let key = "1FAIpQLSeVFUtCGtWkpYWaoUHITLK7Dy842618zwzo1fXIXuIpNtMqRA"; // this is KEY of the URL from the sheet
   url = "https://opensheet.vercel.app/" + key + "/Form+Responses+1"; // here I'm making the string for loadJSON.
   loadJSON(url, gotData);
 
@@ -21,9 +21,9 @@ function gotData(data) {
   for (let i = 0; i < data.length; i++) {
     bubbles.push(
       new Bubble(
-        data[i]["What makes you happy?"],
-        data[i]["What are you thankful for?"],
-        data[i]["Your name here"])); // THESE NEED TO MATCH SPREADSHEET
+        data[i]["What is your favorite color?"],
+        // data[i]["What are you thankful for?"],
+        data[i]["What is your name?"])); // THESE NEED TO MATCH SPREADSHEET
 
   }
 }
@@ -39,9 +39,9 @@ function draw() {
 
 // my Bubble class
 class Bubble {
-  constructor(happy, thankful, name) {
+  constructor(color, thankful, name) {
     // only the order of these parameters matters!
-    this.happy = happy;
+    this.color = color;
     this.thankful = thankful;
     this.name = name;
     this.pos = createVector(random(width), random(height));
@@ -52,7 +52,7 @@ class Bubble {
     stroke("red");
     noFill();
     ellipse(this.pos.x, this.pos.y + 10, 120, 120);
-    fill("white");
+    fill("this.color");
     text(
       this.name + "\n" + this.happy + "\n" + this.thankful,
       this.pos.x,
