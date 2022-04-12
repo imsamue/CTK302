@@ -68,9 +68,8 @@ function draw() {
       cloud(x, 275, 3);
       // move the cloud's x position
       x = x + windspeed / 3;
-      if (x > width) x = 0;
-      // 
-      // //thermometer
+      if (x > width + 12) x = -12;
+      //thermometer
       // fill("red");
       // y = map(temperature, -10, 100, 5, height - 10);
       // rect(width / 2, 100, 20, y);

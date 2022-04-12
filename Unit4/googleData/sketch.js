@@ -7,7 +7,7 @@ function setup() {
   loadJSON(url, gotData);
 
   // Regular setup code we usually have
-  createCanvas(600, 600);
+  createCanvas(windowWidth, windowHeight);
   textAlign(CENTER);
   ellipseMode(CENTER);
   rectMode(CENTER);
