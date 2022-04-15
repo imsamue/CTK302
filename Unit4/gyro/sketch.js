@@ -64,7 +64,7 @@ function draw() {
   // text("z = " + z.toFixed(4), 25, 190);
   fill('white');
   noStroke();
-  textSize(64);
+  textSize(48);
   textAlign(CENTER);
   textFont(font);
   text("Miss, excuse me, Miss", width / 2, 70);
