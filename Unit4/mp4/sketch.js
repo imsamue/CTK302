@@ -25,6 +25,16 @@ function setup() {
   pic = loadImage("assets/sunset.jpg");
   imageMode(CENTER);
   angleMode(DEGREES);
+
+  let inp = createInput("");
+  inp.position(25, 25);
+  inp.size(200);
+  inp.input(myInputEvent);
+}
+
+
+function myInputEvent() {
+  console.log("you are typing: ", this.value());
 }
 
 function gotData(data) {
@@ -45,6 +55,13 @@ function draw() {
       break;
 
     case 1:
+      background ("purple");
+      textFont(font);
+      textSize(28);
+      text();
+      break;
+
+    case 2:
       c1 = color(140, 170, 255);
       c2 = color(100, 130, 255);
       setGradient(c1, c2);
@@ -56,19 +73,17 @@ function draw() {
       textSize(44);
       push();
       textAlign(LEFT, CENTER);
-      text("What is the weather in " + weather.name + "?", 20, 36);
+      text("What is the weather in " + weather.name + "?", 20, 136);
       pop();
 
       textSize(28);
-      text("The windspeed is " + windspeed + " MPH", 20, 100);
-      text("The temperature is " + temperature + " F", 20, 140);
-      // text("The humidity is " + humidity, 20, 180);
-      text("The weather is " + description, 20, 180);
+      text("The windspeed is " + windspeed + " MPH", 20, 200);
+      text("The temperature is " + temperature + " F", 20, 240);
+      text("The weather is " + description, 20, 280);
 
       cloud(x, 275, 3);
-      // move the cloud's x position
-      x = x + windspeed / 3;
-      if (x > width + 12) x = -12;
+        x = x + windspeed / 3;
+        if (x > width + 12) x = -12;
       //thermometer
       // fill("red");
       // y = map(temperature, -10, 100, 5, height - 10);
