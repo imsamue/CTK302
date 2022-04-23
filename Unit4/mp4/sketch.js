@@ -14,7 +14,7 @@ let myCityStringEnd = "&units=imperial&";
 let myIDString = "appid=0f4017190a37b246eda6c1c83528b182";
 
 function setup() {
-  createCanvas(1000, 500);
+  createCanvas(windowWidth, windowHeight);
 
   let button = select("#submit");
   button.mousePressed(userInput);
@@ -25,7 +25,7 @@ function setup() {
 
 function gotData(data) {
   weather = data;
-  print(weather); // for debugging purposes, print out the JSON data when we get it.
+  print(weather);
   name = weather.name;
   windspeed = weather.wind.speed;
   temperature = weather.main.temp;
@@ -40,35 +40,42 @@ function userInput() {
 }
 
 function draw() {
-  switch (state) {
-    case 0:
-      c1 = color(140, 170, 255);
-      c2 = color(100, 130, 255);
-      setGradient(c1, c2);
+  c1 = color(140, 170, 255);
+  c2 = color(96, 128, 235);
+  setGradient(c1, c2);
 
-      fill("black");
-      textFont(font);
-      textSize(44);
-      push();
-      textAlign(LEFT, CENTER);
-      text("What is the weather in " + name + "?", 20, 136);
-      pop();
+  fill("black");
+  textFont(font);
+  textSize(60);
+  push();
+  textAlign(LEFT, CENTER);
+  text("What is the weather in " + name + "?", 20, 60);
+  pop();
 
-      textSize(28);
-      text("The windspeed is " + windspeed + " MPH", 20, 200);
-      text("The temperature is " + temperature + " F", 20, 240);
-      text("The weather is " + description, 20, 280);
+  textSize(28);
+  text("The windspeed is " + windspeed.toFixed(1) + " MPH", 20, 140);
+  text("The temperature is " + temperature.toFixed(0) + " F", 20, 180);
+  text("The weather is " + description, 20, 220);
 
-      cloud(x, 275, 3);
-      x = x + windspeed / 3;
-      if (x > width + 12) x = -12;
-      //thermometer
-      // fill("red");
-      // y = map(temperature, -10, 100, 5, height - 10);
-      // rect(width / 2, 100, 20, y);
+  cloud(x, 350, 4);
+  x = x + windspeed / 3;
+  if (x > width + 24) x = -18;
 
-      break;
-  }
+  //thermometer
+  fill(0, 0);
+  stroke(0);
+  strokeWeight(2);
+  rect(100, 425, width - 200, 40);
+
+  fill("red");
+  noStroke();
+  y = map(temperature, -10, 100, 100, width - 200);
+  rect(100, 426, y, 38);
+  stroke(0);
+  strokeWeight(2);
+  arc(100, 440, 90, 90, 35, 340, OPEN);
+
+
 }
 
 //code from REAS at https://editor.p5js.org/REAS/sketches/S1TNUPzim
