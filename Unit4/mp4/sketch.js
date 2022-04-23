@@ -49,7 +49,8 @@ function draw() {
   textSize(60);
   push();
   textAlign(LEFT, CENTER);
-  text("What is the weather in " + name + "?", 20, 60);
+  // textWrap(WORD);
+  text("What is the weather in " + name + "?", 20, 60, windowWidth);
   pop();
 
   textSize(28);
