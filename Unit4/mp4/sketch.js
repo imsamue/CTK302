@@ -26,7 +26,7 @@ function setup() {
 
   let inp = createInput("");
   inp.position(325, 25);
-  inp.size(50);
+  inp.size(100);
   inp.input(myInputEvent);
 }
 
@@ -53,8 +53,8 @@ function draw() {
       break;
 
     case 1:
-      c1 = color(140, 170, 255);
-      c2 = color(50, 65, 255);
+      c1 = color(150, 180, 255);
+      c2 = color(40, 65, 255);
       setGradient(c1, c2);
       for (var i = 0; i < 5000; i += 75)
         for (var j = 0; j < 5000; j += 75) {
@@ -68,6 +68,11 @@ function draw() {
       textSize(28);
       fill("black");
       text("Insert your zipcode here: ", 25, 45);
+
+      rect(width / 2, 18, 400, 35, 100);
+      fill("white");
+      textSize(28);
+      text("Click Here to check the weather", width / 2 + 20, 45);
       break;
 
     case 2:
@@ -105,8 +110,10 @@ function draw() {
 }
 
 function mouseReleased() {
-  state++;
-  if (state > 2) state = 1;
+  if ((mouseX > width / 2) && (mouseX < width - 100) && (mouseY > 0) && (mouseY < 50)) {
+    state++;
+    if (state > 2) state = 1;
+  }
 }
 
 //code from REAS at https://editor.p5js.org/REAS/sketches/S1TNUPzim
