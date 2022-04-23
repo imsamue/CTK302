@@ -54,11 +54,11 @@ function draw() {
   pop();
 
   textSize(28);
-  text("The windspeed is " + windspeed.toFixed(1) + " MPH", 20, 140);
-  text("The temperature is " + temperature.toFixed(0) + " F", 20, 180);
-  text("The weather is " + description, 20, 220);
+  text("The windspeed is " + windspeed.toFixed(1) + " MPH", 20, 200);
+  text("The temperature is " + temperature.toFixed(0) + " F", 20, 240);
+  text("The weather is " + description, 20, 280);
 
-  cloud(x, 350, 4);
+  cloud(x, 410, 3.5);
   x = x + windspeed / 3;
   if (x > width + 24) x = -18;
 
@@ -66,15 +66,15 @@ function draw() {
   fill(0, 0);
   stroke(0);
   strokeWeight(2);
-  rect(100, 425, width - 200, 40);
+  rect(100, 475, width - 200, 40);
 
   fill("red");
   noStroke();
   y = map(temperature, -10, 100, 100, width - 200);
-  rect(100, 426, y, 38);
+  rect(100, 476, y, 38);
   stroke(0);
   strokeWeight(2);
-  arc(100, 440, 90, 90, 35, 340, OPEN);
+  arc(100, 490, 90, 90, 35, 340, OPEN);
 
 
 }
