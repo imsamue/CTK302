@@ -11,14 +11,12 @@ let pic;
 
 function setup() {
   createCanvas(1000, 500);
-  // HERE is the call to get the weather. We build the string first.
-  let myCityString =
-    "https://api.openweathermap.org/data/2.5/weather?q=Salem,MA,US&units=imperial&";
-  //You can also use "zipcode"
-  // substitute zip=61820 for q=Normal,IL,US
-  // let myIDString = "appid=xxxxx";
+
+  let myCityStringBeg = "https://api.openweathermap.org/data/2.5/weather?zip=";
+  let myCityStringUser = "01970";
+  let myCityStringEnd = "&units=imperial&";
   let myIDString = "appid=0f4017190a37b246eda6c1c83528b182";
-  let myTotalString = myCityString + myIDString;
+  let myTotalString = myCityStringBeg + myCityStringUser + myCityStringEnd + myIDString;
   loadJSON(myTotalString, gotData); // that gotData function happens when JSON comes back.
 
   font = loadFont("assets/champagne/CLbold.ttf");
@@ -27,8 +25,8 @@ function setup() {
   angleMode(DEGREES);
 
   let inp = createInput("");
-  inp.position(25, 25);
-  inp.size(200);
+  inp.position(325, 25);
+  inp.size(50);
   inp.input(myInputEvent);
 }
 
@@ -55,10 +53,21 @@ function draw() {
       break;
 
     case 1:
-      background ("purple");
+      c1 = color(140, 170, 255);
+      c2 = color(50, 65, 255);
+      setGradient(c1, c2);
+      for (var i = 0; i < 5000; i += 75)
+        for (var j = 0; j < 5000; j += 75) {
+          fill(255, 255, 0);
+          noStroke();
+          star(i + 50, j + 90, 15, 25, 12);
+          fill(255, 128, 0, 192);
+          ellipse(i + 50, j + 90, 27);
+        }
       textFont(font);
       textSize(28);
-      text();
+      fill("black");
+      text("Insert your zipcode here: ", 25, 45);
       break;
 
     case 2:
@@ -70,6 +79,8 @@ function draw() {
 
       fill("black");
       textFont(font);
+      textSize(28);
+      text("Insert your zipcode here: ", 25, 45);
       textSize(44);
       push();
       textAlign(LEFT, CENTER);
@@ -82,8 +93,8 @@ function draw() {
       text("The weather is " + description, 20, 280);
 
       cloud(x, 275, 3);
-        x = x + windspeed / 3;
-        if (x > width + 12) x = -12;
+      x = x + windspeed / 3;
+      if (x > width + 12) x = -12;
       //thermometer
       // fill("red");
       // y = map(temperature, -10, 100, 5, height - 10);
@@ -91,6 +102,11 @@ function draw() {
 
       break;
   }
+}
+
+function mouseReleased() {
+  state++;
+  if (state > 2) state = 1;
 }
 
 //code from REAS at https://editor.p5js.org/REAS/sketches/S1TNUPzim
@@ -112,4 +128,19 @@ function cloud(x, y, size) {
   arc(x + 10, y, 25 * size, 45 * size, PI + 180 + 360, 360);
   arc(x + 25, y, 25 * size, 35 * size, PI + 180 + 360, 360);
   arc(x + 40, y, 30 * size, 20 * size, PI + 180 + 360, 360);
+}
+
+function star(x, y, radius1, radius2, npoints) {
+  let angle = 360 / npoints;
+  let halfAngle = angle / 2.0;
+  beginShape();
+  for (let a = 0; a < 360; a += angle) {
+    let sx = x + cos(a) * radius2;
+    let sy = y + sin(a) * radius2;
+    vertex(sx, sy);
+    sx = x + cos(a + halfAngle) * radius1;
+    sy = y + sin(a + halfAngle) * radius1;
+    vertex(sx, sy);
+  }
+  endShape(CLOSE);
 }
