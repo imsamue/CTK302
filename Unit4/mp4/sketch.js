@@ -4,92 +4,54 @@ let state = 0;
 let x = 0;
 let windspeed = 0;
 let temperature = 0;
-let humidity = 0;
 let description = "";
 let font;
-let pic;
+let button;
+let input;
+
+let myCityStringBeg = "https://api.openweathermap.org/data/2.5/weather?zip=";
+let myCityStringEnd = "&units=imperial&";
+let myIDString = "appid=0f4017190a37b246eda6c1c83528b182";
 
 function setup() {
   createCanvas(1000, 500);
 
-  let myCityStringBeg = "https://api.openweathermap.org/data/2.5/weather?zip=";
-  let myCityStringUser = "01970";
-  let myCityStringEnd = "&units=imperial&";
-  let myIDString = "appid=0f4017190a37b246eda6c1c83528b182";
-  let myTotalString = myCityStringBeg + myCityStringUser + myCityStringEnd + myIDString;
-  loadJSON(myTotalString, gotData); // that gotData function happens when JSON comes back.
+  let button = select("#submit");
+  button.mousePressed(userInput);
 
   font = loadFont("assets/champagne/CLbold.ttf");
-  pic = loadImage("assets/sunset.jpg");
-  imageMode(CENTER);
   angleMode(DEGREES);
-
-  let inp = createInput("");
-  inp.position(325, 25);
-  inp.size(100);
-  inp.input(myInputEvent);
-}
-
-
-function myInputEvent() {
-  console.log("you are typing: ", this.value());
 }
 
 function gotData(data) {
   weather = data;
   print(weather); // for debugging purposes, print out the JSON data when we get it.
+  name = weather.name;
   windspeed = weather.wind.speed;
   temperature = weather.main.temp;
   humiditiy = weather.main.humidity;
   description = weather.weather[0].description;
 }
 
+function userInput() {
+  let input = select("#zipCode");
+  let myTotalString = myCityStringBeg + input.value() + myCityStringEnd + myIDString;
+  loadJSON(myTotalString, gotData);
+}
+
 function draw() {
   switch (state) {
     case 0:
-      if (weather) {
-        state = 1;
-      }
-      break;
-
-    case 1:
-      c1 = color(150, 180, 255);
-      c2 = color(40, 65, 255);
-      setGradient(c1, c2);
-      for (var i = 0; i < 5000; i += 75)
-        for (var j = 0; j < 5000; j += 75) {
-          fill(255, 255, 0);
-          noStroke();
-          star(i + 50, j + 90, 15, 25, 12);
-          fill(255, 128, 0, 192);
-          ellipse(i + 50, j + 90, 27);
-        }
-      textFont(font);
-      textSize(28);
-      fill("black");
-      text("Insert your zipcode here: ", 25, 45);
-
-      rect(width / 2, 18, 400, 35, 100);
-      fill("white");
-      textSize(28);
-      text("Click Here to check the weather", width / 2 + 20, 45);
-      break;
-
-    case 2:
       c1 = color(140, 170, 255);
       c2 = color(100, 130, 255);
       setGradient(c1, c2);
 
-      image(pic, 800, height / 2, 450, 750);
-
       fill("black");
       textFont(font);
-      textSize(28);
-      text("Insert your zipcode here: ", 25, 45);
       textSize(44);
       push();
       textAlign(LEFT, CENTER);
-      text("What is the weather in " + weather.name + "?", 20, 136);
+      text("What is the weather in " + name + "?", 20, 136);
       pop();
 
       textSize(28);
@@ -106,13 +68,6 @@ function draw() {
       // rect(width / 2, 100, 20, y);
 
       break;
-  }
-}
-
-function mouseReleased() {
-  if ((mouseX > width / 2) && (mouseX < width - 100) && (mouseY > 0) && (mouseY < 50)) {
-    state++;
-    if (state > 2) state = 1;
   }
 }
 
